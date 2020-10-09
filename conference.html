@@ -1,0 +1,123 @@
+<script type="text/javascript">
+    RED.nodes.registerType('conference',{
+        category: 'Voice',
+        color: '#ffffff',
+        defaults: {
+          name : {},
+          moderation : {},
+          musiconholdurl : {},
+          startonenter : {},
+          endonexit: {},
+          recordingout: {},
+          filename: {},
+          outputs: {value: 0} 
+        },
+        inputs:1,
+        icon: "vonage.png",
+        paletteLabel: "Conference",
+        label: function () {
+            return this.name || 'Conference'
+        },
+        oneditprepare: function (){
+            $(".my-button-group").on("click", function() {
+                $(".my-button-group").removeClass("selected");
+                $(this).addClass("selected");
+            })
+            if (this.moderation == "true"){
+                $(".my-button-group").removeClass("selected");
+                $("#moderated").addClass("selected");
+                $("#moderation_options").css("display",  "block"); 
+            }
+        },
+        oneditsave: function (){
+            var recout = document.getElementById("node-input-recordingout").value
+            if (recout != 'no'){
+                document.getElementById("node-input-outputs").value = 1
+            }
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="conference">
+   
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i>Name</label>
+        <input type="text" id="node-input-name" placeholder="name" style="width:70%;">
+    </div>
+    
+    <div class="form-row">
+        <label for="node-input-recordingout"></i>Record Conference</label>
+        <select type="text" id="node-input-recordingout" style="width:70%;" onchange="toggleRecOutput(this.value)" style="width:70%;">
+          <option value="no" selected>Don't Record</option>
+          <option value="node">Output Recording from Node</option>
+          <option value="file">Save Recording to File</option>
+         </select>
+    </div>
+    <div class="form-row" id='filename' style="display: none;">
+        <label for="node-input-filename"><i class="icon-tag"></i>Filename</label>
+        <input type="text" id="node-input-filename" style="width:70%;" placeholder="/home/recordings/">
+        <input type="hidden" id="node-input-outputs"/>
+    </div>     
+      
+    <div class="form-row>
+        <label for="moderation"></i>Moderation      </label>
+        <span class="button-group" id="moderation">
+        <button type="button" class="red-ui-button toggle selected my-button-group" value="open" id="open" onclick="toggleModeration(this)">Open</button><button type="button" id="moderated" class="red-ui-button toggle my-button-group" value="moderated" onclick="toggleModeration(this)">Moderated</button>
+        <input type="hidden" id="node-input-moderation"/>
+    </span>
+    </div>
+
+    <div id="moderation_options" style="display: none;">
+        <div class="form-row">
+            <label for="node-input-musiconholdurl"><i class="icon-tag"></i>Music On Hold URL</label>
+            <input type="text" id="node-input-musiconholdurl" placeholder="/url" style="width:70%;">
+        </div>
+        
+        <div class="form-row">
+            <label for="node-input-startonenter"><i class="icon-tag"></i>Start On Enter</label>
+            <select type="text" id="node-input-startonenter" style="width:70%;" >
+                <option value="true" selected>Start the conference</option>
+                <option value="false">Wait for a Moderator</option>
+            </select>
+        </div>
+     
+        <div class="form-row">
+            <label for="node-input-endonexit"><i class="icon-tag"></i>End On Exit</label>
+            <select type="text" id="node-input-endonexit" style="width:70%;" >
+                <option value="true" selected>End the conference when the caller hangsup</option>
+                <option value="false">Continue without the caller </option>
+            </select>
+        </div>   
+
+    </div>  
+       
+
+</script>
+
+
+<script>
+    function toggleRecOutput(endpoint){
+      if (endpoint == 'file'){
+        document.getElementById("filename").style.display = "block"; 
+      }
+      else {
+        document.getElementById("filename").style.display = "none";
+      }
+    }
+
+    function toggleModeration(type){
+        if (type.value == "moderated"){
+            document.getElementById("moderation_options").style.display = "block"; 
+            document.getElementById("node-input-moderation").value = true
+      }
+      else {
+        document.getElementById("moderation_options").style.display = "none";
+        document.getElementById("node-input-moderation").value = false
+      }  
+    }
+  </script>
+
+
+<script type="text/x-red" data-help-name="conference">
+<p>Connect a Call to a conference</p>
+</script>

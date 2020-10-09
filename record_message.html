@@ -1,0 +1,114 @@
+<script type="text/javascript">
+    RED.nodes.registerType('record_message',{
+        category: 'Voice',
+        color: '#ffffff',
+        defaults: {
+          name : {},
+          recordingout : {},
+          filename: {},
+          endonsilence : {},
+          endonkey: {},
+          timeOut: {},
+        },
+        inputs:1,
+        outputs:1,
+        icon: "vonage.png",
+        paletteLabel: "Record Message",
+        label: function () {
+            return this.name || 'Record Message'
+        },
+        oneditprepare: function () {
+          if (!this.endonsilence ){
+            document.getElementById('node-input-endonsilence').value = 3
+          }
+          if (!this.timeOut ){
+            document.getElementById('node-input-timeOut').value = 7200
+          }
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="record_message">
+   
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i>Name</label>
+        <input type="text" id="node-input-name" placeholder="name">
+    </div>
+
+    <div class="form-row">
+      <label for="node-input-endonsilence"></i>End after x seconds of silence</label>
+      <input type="range" min="0" max="20" defaultValue="3" class="slider" style="width:50%;" id="node-input-endonsilence" onchange="updateSilence(this.value)">
+      <input type="text" id="endonsilence" disabled style="width:20%;">
+    </div>
+
+  <div class="form-row">
+    <label for="node-input-timeOut"><i class="icon-tag"></i>Max Length in Seconds</label>
+    <input type="range" min="3" max="7200" defaultValue="7200" class="slider" style="width:50%;" id="node-input-timeOut" onchange="updateTimeout(this.value)">
+      <input type="text" id="timeout" disabled style="width:20%;">
+  </div>
+
+    <div class="form-row">
+      <label for="node-input-endonkey"><i class="icon-tag"></i>End on Key</label>
+      <select type="text" id="node-input-endonkey" style="width:70%;">
+        <option value="no">No</option>
+        <option value="*">*</option>
+        <option value="#">#</option>
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5*</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+       </select>
+    </div>
+
+  
+    <div class="form-row">
+        <label for="node-input-recordingout"><i class="fa fa-tasks"></i>Recording Output</label>
+        <select type="text" id="node-input-recordingout" style="width:70%;" onchange="toggleOutput(this.value)">
+          <option value="node">Output from Node</option>
+          <option value="file">Save to File</option>
+         </select>
+    </div>
+    <div class="form-row" id='filename' style="display: none;">
+        <label for="node-input-filename"><i class="icon-tag"></i>Filename</label>
+        <input type="text" id="node-input-filename" style="width:70%;" placeholder="/home/recordings/">
+    </div>
+
+  
+</script>
+
+
+<script>
+    function toggleOutput(endpoint){
+      if (endpoint == 'file'){
+        document.getElementById("filename").style.display = "block"; 
+      }
+      else {
+        document.getElementById("filename").style.display = "none";
+      }
+    }
+
+    function updateSilence(seconds){
+      if (seconds == 0) {
+        document.getElementById('endonsilence').value = 'No'
+      } else {
+        document.getElementById('endonsilence').value = seconds
+      }
+      
+    }
+
+    function updateTimeout(seconds){
+        document.getElementById('timeout').value = seconds
+     
+    }
+  </script>
+
+
+<script type="text/x-red" data-help-name="record_message">
+<p>Record a Call</p>
+</script>

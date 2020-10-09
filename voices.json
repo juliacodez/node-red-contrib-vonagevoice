@@ -1,0 +1,1511 @@
+{
+    "updated" : "2020-08-20",
+    "labels": [
+        "Arabic #0",
+        "Arabic #1",
+        "Arabic #2",
+        "Arabic #3",
+        "Arabic #4",
+        "Arabic #5",
+        "Arabic #6",
+        "Basque #0",
+        "Catalan, Valencian #0",
+        "Catalan, Valencian #1",
+        "Chinese, Cantonese #0",
+        "Chinese, Mandarin #0",
+        "Chinese, Mandarin #1",
+        "Chinese, Mandarin #2",
+        "Chinese, Mandarin #3",
+        "Chinese, Mandarin #4",
+        "Chinese, Mandarin #5",
+        "Chinese, Mandarin (Taiwan) #0",
+        "Czech #0",
+        "Czech #1",
+        "Czech #2",
+        "Danish #0",
+        "Danish #1",
+        "Danish #2",
+        "Dutch #0",
+        "Dutch #1",
+        "Dutch #2",
+        "Dutch #3",
+        "Dutch #4",
+        "Dutch #5",
+        "Dutch #6",
+        "English (Australia) #0",
+        "English (Australia) #1",
+        "English (Australia) #2",
+        "English (Australia) #3",
+        "English (Australia) #4",
+        "English (Australia) #5",
+        "English (India) #0",
+        "English (India) #1",
+        "English (India) #2",
+        "English (India) #3",
+        "English (India) #4",
+        "English (South Africa) #0",
+        "English (United Kingdom) #0",
+        "English (United Kingdom) #1",
+        "English (United Kingdom) #2",
+        "English (United Kingdom) #3",
+        "English (United Kingdom) #4",
+        "English (United Kingdom) #5",
+        "English (United Kingdom) #6",
+        "English (United States) #1",
+        "English (United States) #2",
+        "English (United States) #3",
+        "English (United States) #0",
+        "English (United States) #4",
+        "English (United States) #5",
+        "English (United States) #6",
+        "English (United States) #7",
+        "English (United States) #8",
+        "English (United States) #9",
+        "English (United States) #10",
+        "English (United States) #11",
+        "English (Wales) #0",
+        "Filipino #0",
+        "Finnish #0",
+        "Finnish #1",
+        "French (Canada) #0",
+        "French (Canada) #1",
+        "French (Canada) #2",
+        "French (Canada) #3",
+        "French (Canada) #4",
+        "French (France) #0",
+        "French (France) #1",
+        "French (France) #2",
+        "French (France) #3",
+        "French (France) #4",
+        "French (France) #5",
+        "French (France) #6",
+        "French (France) #7",
+        "German #0",
+        "German #1",
+        "German #2",
+        "German #3",
+        "German #4",
+        "Greek #0",
+        "Greek #1",
+        "Greek #2",
+        "Hebrew #0",
+        "Hindi #0",
+        "Hindi #1",
+        "Hindi #2",
+        "Hindi #3",
+        "Hindi #4",
+        "Hungarian #0",
+        "Hungarian #1",
+        "Icelandic #0",
+        "Icelandic #1",
+        "Indonesian #0",
+        "Indonesian #1",
+        "Indonesian #2",
+        "Indonesian #3",
+        "Italian #0",
+        "Italian #1",
+        "Italian #2",
+        "Italian #3",
+        "Italian #4",
+        "Italian #5",
+        "Italian #6",
+        "Japanese #0",
+        "Japanese #1",
+        "Japanese #2",
+        "Japanese #3",
+        "Japanese #4",
+        "Japanese #5",
+        "Korean #0",
+        "Korean #1",
+        "Korean #2",
+        "Korean #3",
+        "Korean #4",
+        "Korean #5",
+        "Norwegian #0",
+        "Norwegian #1",
+        "Norwegian, Bokmål #0",
+        "Norwegian, Bokmål #1",
+        "Norwegian, Bokmål #2",
+        "Norwegian, Bokmål #3",
+        "Norwegian, Bokmål #4",
+        "Norwegian, Bokmål #5",
+        "Polish #0",
+        "Polish #1",
+        "Polish #2",
+        "Polish #3",
+        "Polish #4",
+        "Polish #5",
+        "Polish #6",
+        "Polish #7",
+        "Polish #8",
+        "Portuguese (Brazil) #0",
+        "Portuguese (Brazil) #1",
+        "Portuguese (Brazil) #2",
+        "Portuguese (Brazil) #3",
+        "Portuguese (Brazil) #4",
+        "Portuguese (Portugal) #0",
+        "Portuguese (Portugal) #1",
+        "Portuguese (Portugal) #2",
+        "Portuguese (Portugal) #3",
+        "Portuguese (Portugal) #4",
+        "Portuguese (Portugal) #5",
+        "Portuguese (Portugal) #6",
+        "Portuguese (Portugal) #7",
+        "Romanian #0",
+        "Romanian #1",
+        "Russian #0",
+        "Russian #1",
+        "Russian #2",
+        "Russian #3",
+        "Russian #4",
+        "Russian #5",
+        "Russian #6",
+        "Slovak #0",
+        "Slovak #1",
+        "Spanish (Mexico) #0",
+        "Spanish (Spain) #0",
+        "Spanish (Spain) #1",
+        "Spanish (Spain) #2",
+        "Spanish (Spain) #3",
+        "Spanish (Spain) #4",
+        "Spanish (United States) #0",
+        "Spanish (United States) #1",
+        "Swedish #0",
+        "Swedish #1",
+        "Swedish #2",
+        "Swedish #3",
+        "Thai #0",
+        "Turkish #0",
+        "Turkish #1",
+        "Turkish #2",
+        "Turkish #3",
+        "Turkish #4",
+        "Turkish #5",
+        "Turkish #6",
+        "Turkish #7",
+        "Ukrainian #0",
+        "Vietnamese #0",
+        "Vietnamese #1",
+        "Vietnamese #2",
+        "Vietnamese #3",
+        "Welsh #0"
+    ],
+    "properties": {
+        "Arabic #0": {
+            "code": "ar",
+            "name": "Arabic",
+            "native": "العربية",
+            "ssml": true,
+            "style": 0
+        },
+        "Arabic #1": {
+            "code": "ar",
+            "name": "Arabic",
+            "native": "العربية",
+            "ssml": true,
+            "style": 1
+        },
+        "Arabic #2": {
+            "code": "ar",
+            "name": "Arabic",
+            "native": "العربية",
+            "ssml": true,
+            "style": 2
+        },
+        "Arabic #3": {
+            "code": "ar",
+            "name": "Arabic",
+            "native": "العربية",
+            "ssml": true,
+            "style": 3
+        },
+        "Arabic #4": {
+            "code": "ar",
+            "name": "Arabic",
+            "native": "العربية",
+            "ssml": true,
+            "style": 4
+        },
+        "Arabic #5": {
+            "code": "ar",
+            "name": "Arabic",
+            "native": "العربية",
+            "ssml": true,
+            "style": 5
+        },
+        "Arabic #6": {
+            "code": "ar",
+            "name": "Arabic",
+            "native": "العربية",
+            "ssml": true,
+            "style": 6
+        },
+        "Basque #0": {
+            "code": "eu-ES",
+            "name": "Basque",
+            "native": "euskara",
+            "ssml": true,
+            "style": 0
+        },
+        "Catalan, Valencian #0": {
+            "code": "ca-ES",
+            "name": "Catalan, Valencian",
+            "native": "català, valencià",
+            "ssml": true,
+            "style": 0
+        },
+        "Catalan, Valencian #1": {
+            "code": "ca-ES",
+            "name": "Catalan, Valencian",
+            "native": "català, valencià",
+            "ssml": true,
+            "style": 1
+        },
+        "Chinese, Cantonese #0": {
+            "code": "yue-CN",
+            "name": "Chinese, Cantonese",
+            "native": "粤语",
+            "ssml": true,
+            "style": 0
+        },
+        "Chinese, Mandarin #0": {
+            "code": "cmn-CN",
+            "name": "Chinese, Mandarin",
+            "native": "官话",
+            "ssml": true,
+            "style": 0
+        },
+        "Chinese, Mandarin #1": {
+            "code": "cmn-CN",
+            "name": "Chinese, Mandarin",
+            "native": "官话",
+            "ssml": true,
+            "style": 1
+        },
+        "Chinese, Mandarin #2": {
+            "code": "cmn-CN",
+            "name": "Chinese, Mandarin",
+            "native": "官话",
+            "ssml": true,
+            "style": 2
+        },
+        "Chinese, Mandarin #3": {
+            "code": "cmn-CN",
+            "name": "Chinese, Mandarin",
+            "native": "官话",
+            "ssml": true,
+            "style": 3
+        },
+        "Chinese, Mandarin #4": {
+            "code": "cmn-CN",
+            "name": "Chinese, Mandarin",
+            "native": "官话",
+            "ssml": true,
+            "style": 4
+        },
+        "Chinese, Mandarin #5": {
+            "code": "cmn-CN",
+            "name": "Chinese, Mandarin",
+            "native": "官话",
+            "ssml": true,
+            "style": 5
+        },
+        "Chinese, Mandarin (Taiwan) #0": {
+            "code": "cmn-TW",
+            "name": "Chinese, Mandarin (Taiwan)",
+            "native": "官话",
+            "ssml": true,
+            "style": 0
+        },
+        "Czech #0": {
+            "code": "cs-CZ",
+            "name": "Czech",
+            "native": "čeština",
+            "ssml": true,
+            "style": 0
+        },
+        "Czech #1": {
+            "code": "cs-CZ",
+            "name": "Czech",
+            "native": "čeština",
+            "ssml": true,
+            "style": 1
+        },
+        "Czech #2": {
+            "code": "cs-CZ",
+            "name": "Czech",
+            "native": "čeština",
+            "ssml": true,
+            "style": 2
+        },
+        "Danish #0": {
+            "code": "da-DK",
+            "name": "Danish",
+            "native": "dansk",
+            "ssml": true,
+            "style": 0
+        },
+        "Danish #1": {
+            "code": "da-DK",
+            "name": "Danish",
+            "native": "dansk",
+            "ssml": true,
+            "style": 1
+        },
+        "Danish #2": {
+            "code": "da-DK",
+            "name": "Danish",
+            "native": "dansk",
+            "ssml": true,
+            "style": 2
+        },
+        "Dutch #0": {
+            "code": "nl-NL",
+            "name": "Dutch",
+            "native": "Nederlands",
+            "ssml": true,
+            "style": 0
+        },
+        "Dutch #1": {
+            "code": "nl-NL",
+            "name": "Dutch",
+            "native": "Nederlands",
+            "ssml": true,
+            "style": 1
+        },
+        "Dutch #2": {
+            "code": "nl-NL",
+            "name": "Dutch",
+            "native": "Nederlands",
+            "ssml": true,
+            "style": 2
+        },
+        "Dutch #3": {
+            "code": "nl-NL",
+            "name": "Dutch",
+            "native": "Nederlands",
+            "ssml": true,
+            "style": 3
+        },
+        "Dutch #4": {
+            "code": "nl-NL",
+            "name": "Dutch",
+            "native": "Nederlands",
+            "ssml": true,
+            "style": 4
+        },
+        "Dutch #5": {
+            "code": "nl-NL",
+            "name": "Dutch",
+            "native": "Nederlands",
+            "ssml": true,
+            "style": 5
+        },
+        "Dutch #6": {
+            "code": "nl-NL",
+            "name": "Dutch",
+            "native": "Nederlands",
+            "ssml": true,
+            "style": 6
+        },
+        "English (Australia) #0": {
+            "code": "en-AU",
+            "name": "English (Australia)",
+            "native": "English",
+            "ssml": true,
+            "style": 0
+        },
+        "English (Australia) #1": {
+            "code": "en-AU",
+            "name": "English (Australia)",
+            "native": "English",
+            "ssml": true,
+            "style": 1
+        },
+        "English (Australia) #2": {
+            "code": "en-AU",
+            "name": "English (Australia)",
+            "native": "English",
+            "ssml": true,
+            "style": 2
+        },
+        "English (Australia) #3": {
+            "code": "en-AU",
+            "name": "English (Australia)",
+            "native": "English",
+            "ssml": true,
+            "style": 3
+        },
+        "English (Australia) #4": {
+            "code": "en-AU",
+            "name": "English (Australia)",
+            "native": "English",
+            "ssml": true,
+            "style": 4
+        },
+        "English (Australia) #5": {
+            "code": "en-AU",
+            "name": "English (Australia)",
+            "native": "English",
+            "ssml": true,
+            "style": 5
+        },
+        "English (India) #0": {
+            "code": "en-IN",
+            "name": "English (India)",
+            "native": "English",
+            "ssml": true,
+            "style": 0
+        },
+        "English (India) #1": {
+            "code": "en-IN",
+            "name": "English (India)",
+            "native": "English",
+            "ssml": true,
+            "style": 1
+        },
+        "English (India) #2": {
+            "code": "en-IN",
+            "name": "English (India)",
+            "native": "English",
+            "ssml": true,
+            "style": 2
+        },
+        "English (India) #3": {
+            "code": "en-IN",
+            "name": "English (India)",
+            "native": "English",
+            "ssml": true,
+            "style": 3
+        },
+        "English (India) #4": {
+            "code": "en-IN",
+            "name": "English (India)",
+            "native": "English",
+            "ssml": true,
+            "style": 4
+        },
+        "English (South Africa) #0": {
+            "code": "en-ZA",
+            "name": "English (South Africa)",
+            "native": "English",
+            "ssml": true,
+            "style": 0
+        },
+        "English (United Kingdom) #0": {
+            "code": "en-GB",
+            "name": "English (United Kingdom)",
+            "native": "English",
+            "ssml": true,
+            "style": 0
+        },
+        "English (United Kingdom) #1": {
+            "code": "en-GB",
+            "name": "English (United Kingdom)",
+            "native": "English",
+            "ssml": true,
+            "style": 1
+        },
+        "English (United Kingdom) #2": {
+            "code": "en-GB",
+            "name": "English (United Kingdom)",
+            "native": "English",
+            "ssml": true,
+            "style": 2
+        },
+        "English (United Kingdom) #3": {
+            "code": "en-GB",
+            "name": "English (United Kingdom)",
+            "native": "English",
+            "ssml": true,
+            "style": 3
+        },
+        "English (United Kingdom) #4": {
+            "code": "en-GB",
+            "name": "English (United Kingdom)",
+            "native": "English",
+            "ssml": true,
+            "style": 4
+        },
+        "English (United Kingdom) #5": {
+            "code": "en-GB",
+            "name": "English (United Kingdom)",
+            "native": "English",
+            "ssml": true,
+            "style": 5
+        },
+        "English (United Kingdom) #6": {
+            "code": "en-GB",
+            "name": "English (United Kingdom)",
+            "native": "English",
+            "ssml": true,
+            "style": 6
+        },
+        "English (United States) #0": {
+            "code": "en-US",
+            "name": "English (United States)",
+            "native": "English",
+            "ssml": true,
+            "style": 0
+        },
+        "English (United States) #1": {
+            "code": "en-US",
+            "name": "English (United States)",
+            "native": "English",
+            "ssml": true,
+            "style": 1
+        },
+        "English (United States) #10": {
+            "code": "en-US",
+            "name": "English (United States)",
+            "native": "English",
+            "ssml": true,
+            "style": 10
+        },
+        "English (United States) #11": {
+            "code": "en-US",
+            "name": "English (United States)",
+            "native": "English",
+            "ssml": true,
+            "style": 11
+        },
+        "English (United States) #2": {
+            "code": "en-US",
+            "name": "English (United States)",
+            "native": "English",
+            "ssml": true,
+            "style": 2
+        },
+        "English (United States) #3": {
+            "code": "en-US",
+            "name": "English (United States)",
+            "native": "English",
+            "ssml": true,
+            "style": 3
+        },
+        "English (United States) #4": {
+            "code": "en-US",
+            "name": "English (United States)",
+            "native": "English",
+            "ssml": true,
+            "style": 4
+        },
+        "English (United States) #5": {
+            "code": "en-US",
+            "name": "English (United States)",
+            "native": "English",
+            "ssml": true,
+            "style": 5
+        },
+        "English (United States) #6": {
+            "code": "en-US",
+            "name": "English (United States)",
+            "native": "English",
+            "ssml": true,
+            "style": 6
+        },
+        "English (United States) #7": {
+            "code": "en-US",
+            "name": "English (United States)",
+            "native": "English",
+            "ssml": true,
+            "style": 7
+        },
+        "English (United States) #8": {
+            "code": "en-US",
+            "name": "English (United States)",
+            "native": "English",
+            "ssml": true,
+            "style": 8
+        },
+        "English (United States) #9": {
+            "code": "en-US",
+            "name": "English (United States)",
+            "native": "English",
+            "ssml": true,
+            "style": 9
+        },
+        "English (Wales) #0": {
+            "code": "en-GB-WLS",
+            "name": "English (Wales)",
+            "native": "English",
+            "ssml": true,
+            "style": 0
+        },
+        "Filipino #0": {
+            "code": "fil-PH",
+            "name": "Filipino",
+            "native": "Wikang pambansa",
+            "ssml": true,
+            "style": 0
+        },
+        "Finnish #0": {
+            "code": "fi-FI",
+            "name": "Finnish",
+            "native": "Suomi",
+            "ssml": true,
+            "style": 0
+        },
+        "Finnish #1": {
+            "code": "fi-FI",
+            "name": "Finnish",
+            "native": "Suomi",
+            "ssml": true,
+            "style": 1
+        },
+        "French (Canada) #0": {
+            "code": "fr-CA",
+            "name": "French (Canada)",
+            "native": "français",
+            "ssml": true,
+            "style": 0
+        },
+        "French (Canada) #1": {
+            "code": "fr-CA",
+            "name": "French (Canada)",
+            "native": "français",
+            "ssml": true,
+            "style": 1
+        },
+        "French (Canada) #2": {
+            "code": "fr-CA",
+            "name": "French (Canada)",
+            "native": "français",
+            "ssml": true,
+            "style": 2
+        },
+        "French (Canada) #3": {
+            "code": "fr-CA",
+            "name": "French (Canada)",
+            "native": "français",
+            "ssml": true,
+            "style": 3
+        },
+        "French (Canada) #4": {
+            "code": "fr-CA",
+            "name": "French (Canada)",
+            "native": "français",
+            "ssml": true,
+            "style": 4
+        },
+        "French (France) #0": {
+            "code": "fr-FR",
+            "name": "French (France)",
+            "native": "français",
+            "ssml": true,
+            "style": 0
+        },
+        "French (France) #1": {
+            "code": "fr-FR",
+            "name": "French (France)",
+            "native": "Français",
+            "ssml": true,
+            "style": 1
+        },
+        "French (France) #2": {
+            "code": "fr-FR",
+            "name": "French (France)",
+            "native": "français",
+            "ssml": true,
+            "style": 2
+        },
+        "French (France) #3": {
+            "code": "fr-FR",
+            "name": "French (France)",
+            "native": "français",
+            "ssml": true,
+            "style": 3
+        },
+        "French (France) #4": {
+            "code": "fr-FR",
+            "name": "French (France)",
+            "native": "français",
+            "ssml": true,
+            "style": 4
+        },
+        "French (France) #5": {
+            "code": "fr-FR",
+            "name": "French (France)",
+            "native": "français",
+            "ssml": true,
+            "style": 5
+        },
+        "French (France) #6": {
+            "code": "fr-FR",
+            "name": "French (France)",
+            "native": "français",
+            "ssml": true,
+            "style": 6
+        },
+        "French (France) #7": {
+            "code": "fr-FR",
+            "name": "French (France)",
+            "native": "français",
+            "ssml": true,
+            "style": 7
+        },
+        "German #0": {
+            "code": "de-DE",
+            "name": "German",
+            "native": "Deutsch",
+            "ssml": true,
+            "style": 0
+        },
+        "German #1": {
+            "code": "de-DE",
+            "name": "German",
+            "native": "Deutsch",
+            "ssml": true,
+            "style": 1
+        },
+        "German #2": {
+            "code": "de-DE",
+            "name": "German",
+            "native": "Deutsch",
+            "ssml": true,
+            "style": 2
+        },
+        "German #3": {
+            "code": "de-DE",
+            "name": "German",
+            "native": "Deutsch",
+            "ssml": true,
+            "style": 3
+        },
+        "German #4": {
+            "code": "de-DE",
+            "name": "German",
+            "native": "Deutsch",
+            "ssml": true,
+            "style": 4
+        },
+        "Greek #0": {
+            "code": "el-GR",
+            "name": "Greek",
+            "native": "ελληνικά",
+            "ssml": true,
+            "style": 0
+        },
+        "Greek #1": {
+            "code": "el-GR",
+            "name": "Greek",
+            "native": "ελληνικά",
+            "ssml": true,
+            "style": 1
+        },
+        "Greek #2": {
+            "code": "el-GR",
+            "name": "Greek",
+            "native": "ελληνικά",
+            "ssml": true,
+            "style": 2
+        },
+        "Hebrew #0": {
+            "code": "he-IL",
+            "name": "Hebrew",
+            "native": "עברית",
+            "ssml": true,
+            "style": 0
+        },
+        "Hindi #0": {
+            "code": "hi-IN",
+            "name": "Hindi",
+            "native": "हिन्दी",
+            "ssml": true,
+            "style": 0
+        },
+        "Hindi #1": {
+            "code": "hi-IN",
+            "name": "Hindi",
+            "native": "हिन्दी",
+            "ssml": true,
+            "style": 1
+        },
+        "Hindi #2": {
+            "code": "hi-IN",
+            "name": "Hindi",
+            "native": "हिन्दी",
+            "ssml": true,
+            "style": 2
+        },
+        "Hindi #3": {
+            "code": "hi-IN",
+            "name": "Hindi",
+            "native": "हिन्दी",
+            "ssml": true,
+            "style": 3
+        },
+        "Hindi #4": {
+            "code": "hi-IN",
+            "name": "Hindi",
+            "native": "हिन्दी",
+            "ssml": true,
+            "style": 4
+        },
+        "Hungarian #0": {
+            "code": "hu-HU",
+            "name": "Hungarian",
+            "native": "magyar",
+            "ssml": true,
+            "style": 0
+        },
+        "Hungarian #1": {
+            "code": "hu-HU",
+            "name": "Hungarian",
+            "native": "magyar",
+            "ssml": true,
+            "style": 1
+        },
+        "Icelandic #0": {
+            "code": "is-IS",
+            "name": "Icelandic",
+            "native": "Íslenska",
+            "ssml": true,
+            "style": 0
+        },
+        "Icelandic #1": {
+            "code": "is-IS",
+            "name": "Icelandic",
+            "native": "Íslenska",
+            "ssml": true,
+            "style": 1
+        },
+        "Indonesian #0": {
+            "code": "id-ID",
+            "name": "Indonesian",
+            "native": "Bahasa Indonesia",
+            "ssml": true,
+            "style": 0
+        },
+        "Indonesian #1": {
+            "code": "id-ID",
+            "name": "Indonesian",
+            "native": "Bahasa Indonesia",
+            "ssml": true,
+            "style": 1
+        },
+        "Indonesian #2": {
+            "code": "id-ID",
+            "name": "Indonesian",
+            "native": "Bahasa Indonesia",
+            "ssml": true,
+            "style": 2
+        },
+        "Indonesian #3": {
+            "code": "id-ID",
+            "name": "Indonesian",
+            "native": "Bahasa Indonesia",
+            "ssml": true,
+            "style": 3
+        },
+        "Italian #0": {
+            "code": "it-IT",
+            "name": "Italian",
+            "native": "Italiano",
+            "ssml": true,
+            "style": 0
+        },
+        "Italian #1": {
+            "code": "it-IT",
+            "name": "Italian",
+            "native": "Italiano",
+            "ssml": true,
+            "style": 1
+        },
+        "Italian #2": {
+            "code": "it-IT",
+            "name": "Italian",
+            "native": "Italiano",
+            "ssml": true,
+            "style": 2
+        },
+        "Italian #3": {
+            "code": "it-IT",
+            "name": "Italian",
+            "native": "Italiano",
+            "ssml": true,
+            "style": 3
+        },
+        "Italian #4": {
+            "code": "it-IT",
+            "name": "Italian",
+            "native": "Italiano",
+            "ssml": true,
+            "style": 4
+        },
+        "Italian #5": {
+            "code": "it-IT",
+            "name": "Italian",
+            "native": "Italiano",
+            "ssml": true,
+            "style": 5
+        },
+        "Italian #6": {
+            "code": "it-IT",
+            "name": "Italian",
+            "native": "Italiano",
+            "ssml": true,
+            "style": 6
+        },
+        "Japanese #0": {
+            "code": "ja-JP",
+            "name": "Japanese",
+            "native": "日本語",
+            "ssml": true,
+            "style": 0
+        },
+        "Japanese #1": {
+            "code": "ja-JP",
+            "name": "Japanese",
+            "native": "日本語",
+            "ssml": true,
+            "style": 1
+        },
+        "Japanese #2": {
+            "code": "ja-JP",
+            "name": "Japanese",
+            "native": "日本語",
+            "ssml": true,
+            "style": 2
+        },
+        "Japanese #3": {
+            "code": "ja-JP",
+            "name": "Japanese",
+            "native": "日本語",
+            "ssml": true,
+            "style": 3
+        },
+        "Japanese #4": {
+            "code": "ja-JP",
+            "name": "Japanese",
+            "native": "日本語",
+            "ssml": true,
+            "style": 4
+        },
+        "Japanese #5": {
+            "code": "ja-JP",
+            "name": "Japanese",
+            "native": "日本語",
+            "ssml": true,
+            "style": 5
+        },
+        "Korean #0": {
+            "code": "ko-KR",
+            "name": "Korean",
+            "native": "한국어",
+            "ssml": true,
+            "style": 0
+        },
+        "Korean #1": {
+            "code": "ko-KR",
+            "name": "Korean",
+            "native": "한국어",
+            "ssml": true,
+            "style": 1
+        },
+        "Korean #2": {
+            "code": "ko-KR",
+            "name": "Korean",
+            "native": "한국어",
+            "ssml": true,
+            "style": 2
+        },
+        "Korean #3": {
+            "code": "ko-KR",
+            "name": "Korean",
+            "native": "한국어",
+            "ssml": true,
+            "style": 3
+        },
+        "Korean #4": {
+            "code": "ko-KR",
+            "name": "Korean",
+            "native": "한국어",
+            "ssml": true,
+            "style": 4
+        },
+        "Korean #5": {
+            "code": "ko-KR",
+            "name": "Korean",
+            "native": "한국어",
+            "ssml": true,
+            "style": 5
+        },
+        "Norwegian #0": {
+            "code": "no-NO",
+            "name": "Norwegian",
+            "native": "Norsk",
+            "ssml": true,
+            "style": 0
+        },
+        "Norwegian #1": {
+            "code": "no-NO",
+            "name": "Norwegian",
+            "native": "Norsk",
+            "ssml": true,
+            "style": 1
+        },
+        "Norwegian, Bokmål #0": {
+            "code": "nb-NO",
+            "name": "Norwegian, Bokmål",
+            "native": "Norsk Bokmål",
+            "ssml": true,
+            "style": 0
+        },
+        "Norwegian, Bokmål #1": {
+            "code": "nb-NO",
+            "name": "Norwegian, Bokmål",
+            "native": "Norsk Bokmål",
+            "ssml": true,
+            "style": 1
+        },
+        "Norwegian, Bokmål #2": {
+            "code": "nb-NO",
+            "name": "Norwegian, Bokmål",
+            "native": "Norsk Bokmål",
+            "ssml": true,
+            "style": 2
+        },
+        "Norwegian, Bokmål #3": {
+            "code": "nb-NO",
+            "name": "Norwegian, Bokmål",
+            "native": "Norsk Bokmål",
+            "ssml": true,
+            "style": 3
+        },
+        "Norwegian, Bokmål #4": {
+            "code": "nb-NO",
+            "name": "Norwegian, Bokmål",
+            "native": "Norsk Bokmål",
+            "ssml": true,
+            "style": 4
+        },
+        "Norwegian, Bokmål #5": {
+            "code": "nb-NO",
+            "name": "Norwegian, Bokmål",
+            "native": "Norsk Bokmål",
+            "ssml": true,
+            "style": 5
+        },
+        "Polish #0": {
+            "code": "pl-PL",
+            "name": "Polish",
+            "native": "polski",
+            "ssml": true,
+            "style": 0
+        },
+        "Polish #1": {
+            "code": "pl-PL",
+            "name": "Polish",
+            "native": "polski",
+            "ssml": true,
+            "style": 1
+        },
+        "Polish #2": {
+            "code": "pl-PL",
+            "name": "Polish",
+            "native": "polski",
+            "ssml": true,
+            "style": 2
+        },
+        "Polish #3": {
+            "code": "pl-PL",
+            "name": "Polish",
+            "native": "polski",
+            "ssml": true,
+            "style": 3
+        },
+        "Polish #4": {
+            "code": "pl-PL",
+            "name": "Polish",
+            "native": "polski",
+            "ssml": true,
+            "style": 4
+        },
+        "Polish #5": {
+            "code": "pl-PL",
+            "name": "Polish",
+            "native": "polski",
+            "ssml": true,
+            "style": 5
+        },
+        "Polish #6": {
+            "code": "pl-PL",
+            "name": "Polish",
+            "native": "polski",
+            "ssml": true,
+            "style": 6
+        },
+        "Polish #7": {
+            "code": "pl-PL",
+            "name": "Polish",
+            "native": "polski",
+            "ssml": true,
+            "style": 7
+        },
+        "Polish #8": {
+            "code": "pl-PL",
+            "name": "Polish",
+            "native": "polski",
+            "ssml": true,
+            "style": 8
+        },
+        "Portuguese (Brazil) #0": {
+            "code": "pt-BR",
+            "name": "Portuguese (Brazil)",
+            "native": "Português",
+            "ssml": true,
+            "style": 0
+        },
+        "Portuguese (Brazil) #1": {
+            "code": "pt-BR",
+            "name": "Portuguese (Brazil)",
+            "native": "Português",
+            "ssml": true,
+            "style": 1
+        },
+        "Portuguese (Brazil) #2": {
+            "code": "pt-BR",
+            "name": "Portuguese (Brazil)",
+            "native": "Português",
+            "ssml": true,
+            "style": 2
+        },
+        "Portuguese (Brazil) #3": {
+            "code": "pt-BR",
+            "name": "Portuguese (Brazil)",
+            "native": "Português",
+            "ssml": true,
+            "style": 3
+        },
+        "Portuguese (Brazil) #4": {
+            "code": "pt-BR",
+            "name": "Portuguese (Brazil)",
+            "native": "Português",
+            "ssml": true,
+            "style": 4
+        },
+        "Portuguese (Portugal) #0": {
+            "code": "pt-PT",
+            "name": "Portuguese (Portugal)",
+            "native": "Português",
+            "ssml": true,
+            "style": 0
+        },
+        "Portuguese (Portugal) #1": {
+            "code": "pt-PT",
+            "name": "Portuguese (Portugal)",
+            "native": "Português",
+            "ssml": true,
+            "style": 1
+        },
+        "Portuguese (Portugal) #2": {
+            "code": "pt-PT",
+            "name": "Portuguese (Portugal)",
+            "native": "Português",
+            "ssml": true,
+            "style": 2
+        },
+        "Portuguese (Portugal) #3": {
+            "code": "pt-PT",
+            "name": "Portuguese (Portugal)",
+            "native": "Português",
+            "ssml": true,
+            "style": 3
+        },
+        "Portuguese (Portugal) #4": {
+            "code": "pt-PT",
+            "name": "Portuguese (Portugal)",
+            "native": "Português",
+            "ssml": true,
+            "style": 4
+        },
+        "Portuguese (Portugal) #5": {
+            "code": "pt-PT",
+            "name": "Portuguese (Portugal)",
+            "native": "Português",
+            "ssml": true,
+            "style": 5
+        },
+        "Portuguese (Portugal) #6": {
+            "code": "pt-PT",
+            "name": "Portuguese (Portugal)",
+            "native": "Português",
+            "ssml": true,
+            "style": 6
+        },
+        "Portuguese (Portugal) #7": {
+            "code": "pt-PT",
+            "name": "Portuguese (Portugal)",
+            "native": "Português",
+            "ssml": true,
+            "style": 7
+        },
+        "Romanian #0": {
+            "code": "ro-RO",
+            "name": "Romanian",
+            "native": "Română",
+            "ssml": true,
+            "style": 0
+        },
+        "Romanian #1": {
+            "code": "ro-RO",
+            "name": "Romanian",
+            "native": "Română",
+            "ssml": true,
+            "style": 1
+        },
+        "Russian #0": {
+            "code": "ru-RU",
+            "name": "Russian",
+            "native": "русский",
+            "ssml": true,
+            "style": 0
+        },
+        "Russian #1": {
+            "code": "ru-RU",
+            "name": "Russian",
+            "native": "русский",
+            "ssml": true,
+            "style": 1
+        },
+        "Russian #2": {
+            "code": "ru-RU",
+            "name": "Russian",
+            "native": "русский",
+            "ssml": true,
+            "style": 2
+        },
+        "Russian #3": {
+            "code": "ru-RU",
+            "name": "Russian",
+            "native": "русский",
+            "ssml": true,
+            "style": 3
+        },
+        "Russian #4": {
+            "code": "ru-RU",
+            "name": "Russian",
+            "native": "русский",
+            "ssml": true,
+            "style": 4
+        },
+        "Russian #5": {
+            "code": "ru-RU",
+            "name": "Russian",
+            "native": "русский",
+            "ssml": true,
+            "style": 5
+        },
+        "Russian #6": {
+            "code": "ru-RU",
+            "name": "Russian",
+            "native": "русский",
+            "ssml": true,
+            "style": 6
+        },
+        "Slovak #0": {
+            "code": "sk-SK",
+            "name": "Slovak",
+            "native": "Slovenčina",
+            "ssml": true,
+            "style": 0
+        },
+        "Slovak #1": {
+            "code": "sk-SK",
+            "name": "Slovak",
+            "native": "Slovenčina",
+            "ssml": true,
+            "style": 1
+        },
+        "Spanish (Mexico) #0": {
+            "code": "es-MX",
+            "name": "Spanish (Mexico)",
+            "native": "Español",
+            "ssml": true,
+            "style": 0
+        },
+        "Spanish (Spain) #0": {
+            "code": "es-ES",
+            "name": "Spanish (Spain)",
+            "native": "Español",
+            "ssml": true,
+            "style": 0
+        },
+        "Spanish (Spain) #1": {
+            "code": "es-ES",
+            "name": "Spanish (Spain)",
+            "native": "Español",
+            "ssml": true,
+            "style": 1
+        },
+        "Spanish (Spain) #2": {
+            "code": "es-ES",
+            "name": "Spanish (Spain)",
+            "native": "Español",
+            "ssml": true,
+            "style": 2
+        },
+        "Spanish (Spain) #3": {
+            "code": "es-ES",
+            "name": "Spanish (Spain)",
+            "native": "Español",
+            "ssml": true,
+            "style": 3
+        },
+        "Spanish (Spain) #4": {
+            "code": "es-ES",
+            "name": "Spanish (Spain)",
+            "native": "Español",
+            "ssml": true,
+            "style": 4
+        },
+        "Spanish (United States) #0": {
+            "code": "es-US",
+            "name": "Spanish (United States)",
+            "native": "Español",
+            "ssml": true,
+            "style": 0
+        },
+        "Spanish (United States) #1": {
+            "code": "es-US",
+            "name": "Spanish (United States)",
+            "native": "Español",
+            "ssml": true,
+            "style": 1
+        },
+        "Swedish #0": {
+            "code": "sv-SE",
+            "name": "Swedish",
+            "native": "Svenska",
+            "ssml": true,
+            "style": 0
+        },
+        "Swedish #1": {
+            "code": "sv-SE",
+            "name": "Swedish",
+            "native": "Svenska",
+            "ssml": true,
+            "style": 1
+        },
+        "Swedish #2": {
+            "code": "sv-SE",
+            "name": "Swedish",
+            "native": "Svenska",
+            "ssml": true,
+            "style": 2
+        },
+        "Swedish #3": {
+            "code": "sv-SE",
+            "name": "Swedish",
+            "native": "Svenska",
+            "ssml": true,
+            "style": 3
+        },
+        "Thai #0": {
+            "code": "th-TH",
+            "name": "Thai",
+            "native": "ไทย",
+            "ssml": true,
+            "style": 0
+        },
+        "Turkish #0": {
+            "code": "tr-TR",
+            "name": "Turkish",
+            "native": "Türkçe",
+            "ssml": true,
+            "style": 0
+        },
+        "Turkish #1": {
+            "code": "tr-TR",
+            "name": "Turkish",
+            "native": "Türkçe",
+            "ssml": true,
+            "style": 1
+        },
+        "Turkish #2": {
+            "code": "tr-TR",
+            "name": "Turkish",
+            "native": "Türkçe",
+            "ssml": true,
+            "style": 2
+        },
+        "Turkish #3": {
+            "code": "tr-TR",
+            "name": "Turkish",
+            "native": "Türkçe",
+            "ssml": true,
+            "style": 3
+        },
+        "Turkish #4": {
+            "code": "tr-TR",
+            "name": "Turkish",
+            "native": "Türkçe",
+            "ssml": true,
+            "style": 4
+        },
+        "Turkish #5": {
+            "code": "tr-TR",
+            "name": "Turkish",
+            "native": "Türkçe",
+            "ssml": true,
+            "style": 5
+        },
+        "Turkish #6": {
+            "code": "tr-TR",
+            "name": "Turkish",
+            "native": "Türkçe",
+            "ssml": true,
+            "style": 6
+        },
+        "Turkish #7": {
+            "code": "tr-TR",
+            "name": "Turkish",
+            "native": "Türkçe",
+            "ssml": true,
+            "style": 7
+        },
+        "Ukrainian #0": {
+            "code": "uk-UA",
+            "name": "Ukrainian",
+            "native": "Українська",
+            "ssml": true,
+            "style": 0
+        },
+        "Vietnamese #0": {
+            "code": "vi-VN",
+            "name": "Vietnamese",
+            "native": "Tiếng Việt",
+            "ssml": true,
+            "style": 0
+        },
+        "Vietnamese #1": {
+            "code": "vi-VN",
+            "name": "Vietnamese",
+            "native": "Tiếng Việt",
+            "ssml": true,
+            "style": 1
+        },
+        "Vietnamese #2": {
+            "code": "vi-VN",
+            "name": "Vietnamese",
+            "native": "Tiếng Việt",
+            "ssml": true,
+            "style": 2
+        },
+        "Vietnamese #3": {
+            "code": "vi-VN",
+            "name": "Vietnamese",
+            "native": "Tiếng Việt",
+            "ssml": true,
+            "style": 3
+        },
+        "Welsh #0": {
+            "code": "cy-GB",
+            "name": "Welsh",
+            "native": "Cymraeg",
+            "ssml": true,
+            "style": 0
+        }
+    }
+}

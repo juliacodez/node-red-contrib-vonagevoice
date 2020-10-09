@@ -1,0 +1,210 @@
+<script type="text/javascript">
+    RED.nodes.registerType('menu',{
+        category: 'Voice',
+        color: '#ffffff',
+        defaults: {
+          name : {},
+          valid_digits : {default : []},
+          on_timeout: {},
+          on_invalid: {},
+          timeout : {},
+          submitonhash : {},
+          audiotype: {required:true},
+          text: {},
+          voicename: {},
+          file_url: {},        
+          outputs: {value: 1} 
+        },
+        inputs:1,
+        outputs:1,
+        outputLabels: function(i) {
+            var l = this.valid_digits.split(",")
+            return l[i];
+        },
+        icon: "vonage.png",
+        paletteLabel: "Menu ",
+        label: function () {
+            return this.name || 'Menu'
+        },
+        oneditprepare: function (){
+            var data = this.valid_digits.split(",")
+            for (i in data){
+                let id = data[i]
+                if (id.length == 1){
+                    let e = document.getElementById(id)
+                    e.checked = true
+                }
+            }
+            var voicename = this.voicename
+            jQuery.ajax({
+            type: 'GET',
+            url:"vonageVoice/voices",
+            success: function(data) {
+                var names = document.getElementById('node-input-voicename')
+                for (i in data.labels){
+                    let n = data.labels[i]
+                    var option = document.createElement("option");
+                    option.text = n;
+                    option.value = n;
+                    option.id = n;
+                    if (n == voicename){
+                        option.selected = true
+                    }
+                    names.add(option);
+                }
+            },
+            error: function(e){
+                RED.notify(e.responseText, {type: 'error'});
+            }
+            })    
+        },
+        oneditsave : function (){
+            var responses = []
+            var i = document.getElementById('df').children
+            for (x in i){
+                if (i[x].checked) {
+                    responses.push(i[x].value)
+                }
+            }
+            
+            if (document.getElementById('node-input-on_invalid').value == 'continue'){
+                responses.push('invalid')
+            }
+            if (document.getElementById('node-input-on_timeout').value == 'continue'){
+                responses.push('timeout')
+            }
+            document.getElementById("node-input-valid_digits").value = responses
+            document.getElementById("node-input-outputs").value = responses.length
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="menu">
+   
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i>Name</label>
+        <input type="text" id="node-input-name" placeholder="name">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-audiotype"><i class="fa fa-tasks"></i>Prompt</label>
+        <select type="text" id="node-input-audiotype" style="width:70%;" onchange="toggleType(this.value)">
+          <option value="talk">Text to Speech</option>
+          <option value="stream">Play an Audio File</option>
+          <option value="none" selected="selected">None</option>
+         </select>
+    </div>
+    <div id="talk" style="display: none;">
+        <fieldset>      
+            <legend>Text to Speech Prompt</legend>  
+    <div class="form-row">
+        <label for="node-input-text"><i class="icon-tag"></i>Text</label>
+        <textarea id="node-input-text" rows="4" cols="50" placeholder="text" style="width: 320px; height: 100px;"></textarea>
+    </div>
+    <div class="form-row">
+        <label for="node-input-voicename"><i class="icon-tag"></i>Voice</label>
+        <select type="text" id="node-input-voicename" style="width:70%;">
+        </select>
+    </div>   
+    </fieldset>      
+    </div>
+
+    <div id="stream" style="display: none;">
+        <fieldset>      
+            <legend>Audio File Prompt</legend>     
+        <div class="form-row">
+            <div id="upload">
+                <label for="upFile">Upload File</label>
+                <input type="file" id="upFile" multiple size="50" onchange="uploadFile(this)">
+            </div>
+            <div id="url" style="display: none;">
+                <label for="node-input-file_url">File</label>
+                <input type="text" id="node-input-file_url" disabled>
+            </div>
+        </div>  
+        </fieldset>      
+    </div>
+
+  
+    <div class="form-row">
+        <fieldset id='df'>      
+            <legend>Possible Responses:</legend>     
+            1<input type="checkbox" id="1" value="1"><br>      
+            2<input type="checkbox" id="2" value="2"><br>
+            3<input type="checkbox" id="3" value="3"><br>      
+            4<input type="checkbox" id="4" value="4"><br>      
+            5<input type="checkbox" id="5" value="5"><br>   
+            6<input type="checkbox" id="6" value="6"><br>      
+            7<input type="checkbox" id="7" value="7"><br>      
+            8<input type="checkbox" id="8" value="8"><br>   
+            9<input type="checkbox" id="9" value="9"><br>
+            0<input type="checkbox" id="0" value="0"><br>            
+            &#8727;<input type="checkbox" id="*" value="*"><br>
+            #<input type="checkbox" id="#" value="#"><br>         
+        </fieldset>      
+        <input type="hidden" id="node-input-valid_digits">
+        <input type="hidden" id="node-input-outputs"/>
+    </div>
+    
+    <div class="form-row">
+        <label for="node-input-on_invalid"><i class="icon-tag"></i>On Invalid</label>
+        <select type="text" id="node-input-on_invalid" style="width:70%;">
+            <option value="reprompt">Reprompt</option>
+            <option value="continue">Continue</option>
+        </select>
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-on_timeout"><i class="icon-tag"></i>On Timeout</label>
+        <select type="text" id="node-input-on_timeout" style="width:70%;">
+            <option value="reprompt">Reprompt</option>
+            <option value="continue">Continue</option>
+        </select>
+    </div>
+    
+    
+</script>
+
+
+<script>
+    function toggleType(endpoint){
+      if (endpoint == 'talk'){
+        document.getElementById("talk").style.display = "block";
+        document.getElementById("stream").style.display = "none";
+ 
+      }
+      else if (endpoint == 'stream'){
+        document.getElementById("talk").style.display = "none";
+        document.getElementById("stream").style.display = "block";
+      } else {
+        document.getElementById("talk").style.display = "none";
+        document.getElementById("stream").style.display = "none";  
+      }
+    }
+
+    function uploadFile(file){
+        var data = new FormData();
+        data.append('file', file.files[0]);
+        jQuery.ajax({
+            type: 'POST',
+            url:"vonageVoice/upload",
+            data: data,
+            processData: false, 
+            contentType: false, 
+            success: function(returnval) {
+                document.getElementById("node-input-file_url").value = returnval
+                document.getElementById("upload").style.display = "none";
+                document.getElementById("url").style.display = "block";
+            },
+            error: function(e){
+                RED.notify(e.responseText, {type: 'error'});
+                file.value = null;
+            }
+        });
+    }   
+  </script>
+
+
+<script type="text/x-red" data-help-name="get_digits">
+<p>Get Digits</p>
+</script>

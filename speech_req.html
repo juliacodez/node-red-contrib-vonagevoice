@@ -1,0 +1,242 @@
+<script type="text/javascript">
+    RED.nodes.registerType('speech_req',{
+        category: 'Voice',
+        color: '#ffffff',
+        defaults: {
+          name : {},
+          audiotype: {required:true},
+          text: {},
+          voicename: {},
+          file_url: {},
+          rules: {value:[]},
+          language: {},
+          endOnSilence: {},
+          confidence: {},
+          oninvalid: {},
+          outputs: {value:1}
+        },
+        inputs:1,
+        outputs:1,
+        outputLabels: function(i) {
+            var l = this.rules
+            if (i > l.length){
+                return "invalid response"
+            } else {
+                return l[i];
+            }
+            
+        },
+        icon: "vonage.png",
+        paletteLabel: "Speech Recognition",
+        label: function () {
+            return this.name || 'Speech Recognition'
+        },
+        oneditprepare : function() {
+            var voicename = this.voicename
+            jQuery.ajax({
+            type: 'GET',
+            url:"vonageVoice/voices",
+            success: function(data) {
+                var names = document.getElementById('node-input-voicename')
+                for (i in data.labels){
+                    let n = data.labels[i]
+                    var option = document.createElement("option");
+                    option.text = n;
+                    option.value = n;
+                    option.id = n;
+                    if (n == voicename){
+                        option.selected = true
+                    }
+                    names.add(option);
+                }
+            },
+            error: function(e){
+                RED.notify(e.responseText, {type: 'error'});
+            }
+            })
+            var language = this.language
+            jQuery.ajax({
+            type: 'GET',
+            url:"vonageVoice/languages",
+            success: function(data) {
+                var names = document.getElementById('node-input-language')
+                for (i in data){
+                    let n = data[i]
+                    var option = document.createElement("option");
+                    option.text = n.Language;
+                    option.value = n.Code;
+                    option.id = n.Code;
+                    if (n.Code == language){
+                        option.selected = true
+                    }
+                    names.add(option);
+                }
+            },
+            error: function(e){
+                RED.notify(e.responseText, {type: 'error'});
+            }
+            })
+            var node = this           
+            $("#node-input-rule-container").editableList({
+                height: "auto",
+                removable: true,
+                addItem: function(container,i,data) {
+                    var row = $('<div/>').appendTo(container);
+                    if (data.hasOwnProperty("r")){
+                        $('<input/>',{value: data.r, class:"node-input-rule-value",type:"text",style:"margin-left: 5px;"}).appendTo(row)
+                    } else {
+                        $('<input/>',{class:"node-input-rule-value",type:"text",style:"margin-left: 5px;"}).appendTo(row)
+
+                    }
+                    var finalspan = $('<span/>',{style:"float: right;margin-top: 6px;"}).appendTo(row);
+                    finalspan.append(' &#8594; <span class="node-input-rule-index">'+'</span> ');
+
+                },
+                removeItem: function(opt) {
+                    const index = node.rules.indexOf(opt.r);
+                    if (index > -1) {
+                        node.rules.splice(index, 1);
+                    }
+                    
+                }   
+            });
+            for (var i=0;i<this.rules.length;i++) {
+                var rule = this.rules[i];
+                $("#node-input-rule-container").editableList('addItem',{r:rule,i:i});
+            }
+            if (node.rules.length == 0) {
+                $("#node-input-rule-container").editableList('addItem',{r:"",i:0});
+            }               
+        },
+        oneditsave: function() {
+            var node = this            
+            var rules = $("#node-input-rule-container").editableList('items');
+            node.rules = [];
+            rules.each(function(i) {
+                var v = $(this)[0].children[0].children[0].value
+                node.rules.push(v);
+            });
+            if (document.getElementById('node-input-oninvalid').value == 'continue'){
+                rules.push('invalid_response')
+            }
+            document.getElementById("node-input-outputs").value = rules.length
+
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="speech_req">
+   
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i>Name</label>
+        <input type="text" id="node-input-name" placeholder="name">
+        <input type="hidden" id="node-input-outputs"/>
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-audiotype"><i class="fa fa-tasks"></i>Prompt</label>
+        <select type="text" id="node-input-audiotype" style="width:70%;" onchange="toggleType(this.value)">
+          <option value="talk">Text to Speech</option>
+          <option value="stream">Play an Audio File</option>
+          <option value="none" selected>None</option>
+         </select>
+    </div>
+    <div id="talk" style="display: none;">
+
+    <div class="form-row">
+        <label for="node-input-text"><i class="icon-tag"></i>Text</label>
+        <textarea id="node-input-text" rows="4" cols="50" placeholder="text" style="width: 320px; height: 100px;"></textarea>
+    </div>
+    <div class="form-row">
+        <label for="node-input-voicename"><i class="icon-tag"></i>Voice</label>
+        <select type="text" id="node-input-voicename" style="width:70%;">
+        </select>
+    </div>   
+    </div>
+
+    <div id="stream" style="display: none;">
+        <div class="form-row">
+            <div id="upload">
+                <label for="upFile">Upload File</label>
+                <input type="file" id="upFile" multiple size="50" onchange="uploadFile(this)">
+            </div>
+            <div id="url" style="display: none;">
+                <label for="node-input-file_url">File</label>
+                <input type="text" id="node-input-file_url" disabled>
+            </div>
+        </div>   
+    </div>
+
+    
+    <div class="form-row node-input-rule-container-row">
+        <label for="node-input-#node-input-rule-container"></i>Options</label>
+        <ol id="node-input-rule-container"></ol>
+    </div>
+    <div class="form-row">
+        <label for="node-input-language"><i class="icon-tag"></i>Language</label>
+        <select type="text" id="node-input-language" style="width:70%;">
+        </select>
+    </div>   
+
+    <div class="form-row">
+        <label for="node-input-confidence"></i>Required Confidence Level</label>
+        <input type="range" min="1" max="100" defaultValue="85" class="slider" style="width:50%;" id="node-input-confidence" onchange="updateConfidence(this.value)">
+        <input type="text" id="confidence" disabled style="width:20%;">
+      </div>
+
+      <div class="form-row">
+        <label for="node-input-oninvalid"><i class="icon-tag"></i>On Invalid</label>
+        <select type="text" id="node-input-oninvalid" style="width:70%;">
+            <option value="reprompt">Reprompt</option>
+            <option value="continue">Continue</option>
+        </select>
+    </div>
+</script>
+
+
+<script>
+    function updateConfidence(v){
+        document.getElementById('confidence').value = v+"%"
+     
+    } 
+    function toggleType(endpoint){
+      if (endpoint == 'talk'){
+        document.getElementById("talk").style.display = "block";
+        document.getElementById("stream").style.display = "none";
+ 
+      }
+      else if (endpoint == 'stream'){
+        document.getElementById("talk").style.display = "none";
+        document.getElementById("stream").style.display = "block";
+      } else {
+        document.getElementById("talk").style.display = "none";
+        document.getElementById("stream").style.display = "none";  
+      }
+    }
+
+    function uploadFile(file){
+        var data = new FormData();
+        data.append('file', file.files[0]);
+        jQuery.ajax({
+            type: 'POST',
+            url:"vonageVoice/upload",
+            data: data,
+            processData: false, 
+            contentType: false, 
+            success: function(returnval) {
+                document.getElementById("node-input-file_url").value = returnval
+                document.getElementById("upload").style.display = "none";
+                document.getElementById("url").style.display = "block";
+            },
+            error: function(e){
+                RED.notify(e.responseText, {type: 'error'});
+                file.value = null;
+            }
+        });
+    }   
+  </script>
+
+
+<script type="text/x-red" data-help-name="speech_req">
+<p>ASR Input</p>
+</script>

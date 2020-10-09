@@ -1,0 +1,35 @@
+<script type="text/javascript">
+    RED.nodes.registerType('send_dtmf',{
+        category: 'Voice',
+        color: '#ffffff',
+        defaults: {
+          name : {},
+          digits : {}
+        },
+        inputs:1,
+        outputs:1,
+        icon: "vonage.png",
+        paletteLabel: "Send  DTMF",
+        label: function () {
+            return this.name || 'Send  DTMF'
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="send_dtmf">
+   
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i>Name</label>
+        <input type="text" id="node-input-name" placeholder="name">
+    </div>
+  
+    <div class="form-row">
+        <label for="node-input-digits"><i class="icon-tag"></i>Digits</label>
+        <input type="text" id="node-input-digits" placeholder="123*#">
+    </div>
+</script>
+
+
+<script type="text/x-red" data-help-name="send_dtmf">
+<p>End the Call</p>
+</script>

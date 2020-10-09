@@ -1,0 +1,72 @@
+<script type="text/javascript">
+    RED.nodes.registerType('connect_call',{
+        category: 'Voice',
+        color: '#ffffff',
+        defaults: {
+          name : {},
+          dest : {validate: function(n){
+            if (this.desttype == "phone"){
+                var x = n.replace(/\D/g,'')
+                var test = libphonenumber.isValidNumber('+'+x)
+                if (!test) {
+                    RED.notify(`${n} is not a valid phone number <br><i>Please use full international format</i>` ,{type: 'warning'})        
+                }
+                return test
+            } else if (this.desttype == "vbc") {
+                var reg = new RegExp('^\\d+$');         
+                return reg.test(n)
+            } else {
+                return true
+            }
+          }},
+          desttype : {}
+        },
+        inputs:1,
+        outputs:0,
+        icon: "vonage.png",
+        paletteLabel: "Connect Call",
+        label: function () {
+            return this.name || 'Connect Call'
+        },
+        oneditprepare: function() {
+            $("#node-input-dest").typedInput({
+            type:"phone",
+            types:[{value:"phone",label:"Phone"},{value:"sip",label:"SIP"},{value:"vbc",label:"VBC Extension"}],
+            typeField: "#node-input-desttype"
+})
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="connect_call">
+   
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i>Name</label>
+        <input type="text" id="node-input-name" placeholder="name">
+    </div>
+    
+    <div class="form-row">
+        <label for="node-input-to"><i class="icon-tag"></i>To</label>
+        <input type="text" id="node-input-dest" placeholder="Destination">
+        <input type="hidden" id="node-input-desttype">
+    </div>
+      
+      
+    <div class="form-row">
+        <label for="node-input-timeout"><i class="icon-tag"></i>Answer Timeout</label>
+        <input type="number" id="node-input-timeout" placeholder="60">
+    </div>
+      
+       
+    <div class="form-row">
+        <label for="node-input-limit"><i class="icon-tag"></i>Limit</label>
+        <input type="number" id="node-input-limit" placeholder="7200">
+    </div>
+      
+</script>
+<script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/libphonenumber-js/1.7.57/libphonenumber-js.min.js"></script>
+
+
+<script type="text/x-red" data-help-name="connect_call">
+<p>Connect a Call</p>
+</script>

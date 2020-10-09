@@ -1,0 +1,58 @@
+<script type="text/javascript">
+    RED.nodes.registerType('record_call',{
+        category: 'Voice',
+        color: '#ffffff',
+        defaults: {
+          name : {},
+          recordingout : {},
+          filename: {},
+        },
+        inputs:1,
+        outputs:2,
+        outputLabels: ["call","recording"],
+        icon: "vonage.png",
+        paletteLabel: "Record Call",
+        label: function () {
+            return this.name || 'Record Call'
+        },
+    });
+</script>
+
+<script type="text/x-red" data-template-name="record_call">
+   
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i>Name</label>
+        <input type="text" id="node-input-name" placeholder="name">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-recordingout"><i class="fa fa-tasks"></i>Recording Output</label>
+        <select type="text" id="node-input-recordingout" style="width:70%;" onchange="toggleOutput(this.value)">
+          <option value="node">Output from Node</option>
+          <option value="file">Save to File</option>
+         </select>
+    </div>
+    <div class="form-row" id='filename' style="display: none;">
+        <label for="node-input-filename"><i class="icon-tag"></i>Filename</label>
+        <input type="text" id="node-input-filename" style="width:70%;" placeholder="/home/recordings/">
+    </div>
+
+  
+</script>
+
+
+<script>
+    function toggleOutput(endpoint){
+      if (endpoint == 'file'){
+        document.getElementById("filename").style.display = "block"; 
+      }
+      else {
+        document.getElementById("filename").style.display = "none";
+      }
+    }
+  </script>
+
+
+<script type="text/x-red" data-help-name="record_call">
+<p>Record a Call</p>
+</script>

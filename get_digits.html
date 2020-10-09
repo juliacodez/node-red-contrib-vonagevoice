@@ -1,0 +1,147 @@
+<script type="text/javascript">
+    RED.nodes.registerType('get_digits',{
+        category: 'Voice',
+        color: '#ffffff',
+        defaults: {
+          name : {},
+          maxdigits : {},
+          timeout : {},
+          submitonhash : {},
+          audiotype: {required:true},
+          text: {},
+          voicename: {},
+          file_url: {},
+        },
+        inputs:1,
+        outputs:1,
+        icon: "vonage.png",
+        paletteLabel: "Get Digits ",
+        label: function () {
+            return this.name || 'Get Digits'
+        },
+        oneditprepare : function() {
+            var voicename = this.voicename
+            jQuery.ajax({
+            type: 'GET',
+            url:"vonageVoice/voices",
+            success: function(data) {
+                var names = document.getElementById('node-input-voicename')
+                for (i in data.labels){
+                    let n = data.labels[i]
+                    var option = document.createElement("option");
+                    option.text = n;
+                    option.value = n;
+                    option.id = n;
+                    if (n == voicename){
+                        option.selected = true
+                    }
+                    names.add(option);
+                }
+            },
+            error: function(e){
+                RED.notify(e.responseText, {type: 'error'});
+            }
+            })
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="get_digits">
+   
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i>Name</label>
+        <input type="text" id="node-input-name" placeholder="name">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-audiotype"><i class="fa fa-tasks"></i>Prompt</label>
+        <select type="text" id="node-input-audiotype" style="width:70%;" onchange="toggleType(this.value)">
+          <option value="talk">Text to Speech</option>
+          <option value="stream">Play an Audio File</option>
+          <option value="none" selected=true>None</option>
+         </select>
+    </div>
+    <div id="talk" style="display: none;">
+
+    <div class="form-row">
+        <label for="node-input-text"><i class="icon-tag"></i>Text</label>
+        <textarea id="node-input-text" rows="4" cols="50" placeholder="text" style="width: 320px; height: 100px;"></textarea>
+    </div>
+    <div class="form-row">
+        <label for="node-input-voicename"><i class="icon-tag"></i>Voice</label>
+        <select type="text" id="node-input-voicename" style="width:70%;">
+        </select>
+    </div>   
+    </div>
+
+    <div id="stream" style="display: none;">
+        <div class="form-row">
+            <div id="upload">
+                <label for="upFile">Upload File</label>
+                <input type="file" id="upFile" multiple size="50" onchange="uploadFile(this)">
+            </div>
+            <div id="url" style="display: none;">
+                <label for="node-input-file_url">File</label>
+                <input type="text" id="node-input-file_url" disabled>
+            </div>
+        </div>   
+    </div>
+
+  
+    <div class="form-row">
+        <label for="node-input-maxdigits"><i class="icon-tag"></i>Max Digits</label>
+        <input type="text" id="node-input-maxdigits" placeholder="4">
+    </div>
+    <div class="form-row">
+        <label for="node-input-timeout"><i class="icon-tag"></i>Timeout (seconds)</label>
+        <input type="text" id="node-input-timeout" placeholder="3">
+    </div>
+    <div class="form-row">
+        <label for="node-input-submitonhash"><i class="icon-tag"></i>End on Hash</label>
+        <input type="checkbox" id="node-input-submitonhash">
+    </div>
+</script>
+
+
+<script>
+    function toggleType(endpoint){
+      if (endpoint == 'talk'){
+        document.getElementById("talk").style.display = "block";
+        document.getElementById("stream").style.display = "none";
+ 
+      }
+      else if (endpoint == 'stream'){
+        document.getElementById("talk").style.display = "none";
+        document.getElementById("stream").style.display = "block";
+      } else {
+        document.getElementById("talk").style.display = "none";
+        document.getElementById("stream").style.display = "none";  
+      }
+    }
+
+    function uploadFile(file){
+        var data = new FormData();
+        data.append('file', file.files[0]);
+        jQuery.ajax({
+            type: 'POST',
+            url:"vonageVoice/upload",
+            data: data,
+            processData: false, 
+            contentType: false, 
+            success: function(returnval) {
+                document.getElementById("node-input-file_url").value = returnval
+                document.getElementById("upload").style.display = "none";
+                document.getElementById("url").style.display = "block";
+            },
+            error: function(e){
+                RED.notify(e.responseText, {type: 'error'});
+                file.value = null;
+            }
+        });
+    }   
+  </script>
+
+
+<script type="text/x-red" data-help-name="get_digits">
+<p>Get Digits</p>
+</script>

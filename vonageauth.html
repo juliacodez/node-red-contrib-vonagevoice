@@ -1,0 +1,108 @@
+<script type="text/javascript">
+    RED.nodes.registerType('vonagevoiceapp',{
+        category: 'config',
+        defaults: {
+          name: {}
+        },
+         credentials: {
+           apikey: {type:"text"},
+           apisecret: {type:"text"},
+           baseurl: {type:"text"},
+           appid: {type:"text"},
+           privatekey: {type:"text"}
+        },
+        label: function() {
+            return this.name;
+        },
+        oneditsave: function() {
+          if ($('#node-config-input-baseurl').val() != this.baseurl){
+            updatevoiceapp();
+
+          }
+        },
+        oneditprepare: function() {
+          if (this.credentials.apikey != undefined){
+            $('#node-config-input-apikey').prop("disabled", true)
+          }
+          if (this.credentials.apisecret != undefined){
+            $('#node-config-input-apisecret').prop("disabled", true)
+          }
+          if (this.credentials.appid != undefined){
+            $('#create_button').hide()
+          }
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="vonagevoiceapp">
+  <div class="form-row">
+      <label for="node-config-input-name">Name</label>
+      <input type="text" id="node-config-input-name" placeholder="Name">
+  </div>
+  
+  <div class="form-row">
+      <label for="node-config-input-apikey">API Key</label>
+      <input type="text" id="node-config-input-apikey" placeholder="API Key">
+  </div>
+  
+  <div class="form-row">
+      <label for="node-config-input-apisecret">API Secret</label>
+      <input type="text" id="node-config-input-apisecret" placeholder="API Secret">
+  </div>
+  
+  <div class="form-row">
+      <label for="node-config-input-baseurl"></i>Base URL</label>
+      <input type="text" id="node-config-input-baseurl" placeholder="http://example.com:1880">
+  </div>
+  <div class="form-row" id="create_button">
+    <button id="button" class="red-ui-button" onclick="newnexmovoiceapp()">Create New Application</button><br>   
+  </div>
+  
+  <div class="form-row">
+      <label for="node-config-input-appid"></i>App ID</label>
+      <input type="text" id="node-config-input-appid" placeholder="Application ID" disabled>
+      <input type="hidden"  id="node-config-input-privatekey">
+  </div>
+ 
+      
+</script>
+
+<script type="text/x-red" data-help-name="vonagevoiceapp">
+   <p>Creates a new Vonage Voice Application </p>
+   <h3>Details</h3>
+   <p>Enter your details in the boxes above and click, Create Application, node-red will then create a new application on your account and fill in the App ID fields for you to save.</p>
+</script>
+
+
+<script>
+
+  function newnexmovoiceapp(){
+      var url = 'vonageVoice/new-voice-app';
+      var params = {
+        api_key:  document.getElementById("node-config-input-apikey").value,
+        api_secret: document.getElementById("node-config-input-apisecret").value,
+        name : document.getElementById("node-config-input-name").value,
+        base_url : document.getElementById("node-config-input-baseurl").value
+      }
+      $.post(url, params, function(res){
+        document.getElementById("node-config-input-appid").value = res.id;
+        document.getElementById("node-config-input-privatekey").value = res.keys.private_key;
+        document.getElementById("create_button").style = none
+        }, 'json'
+      );
+  }
+
+  function updatevoiceapp(){
+      var app_id =  document.getElementById("node-config-input-appid").value
+      var url = 'vonageVoice/update-voice-app/'+app_id;
+      var params = {
+        api_key:  document.getElementById("node-config-input-apikey").value,
+        api_secret: document.getElementById("node-config-input-apisecret").value,
+        name : document.getElementById("node-config-input-name").value,
+        base_url : document.getElementById("node-config-input-baseurl").value
+      }
+      $.post(url, params)
+  }
+</script>
+    
+    

@@ -1,0 +1,201 @@
+<script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/libphonenumber-js/1.7.57/libphonenumber-js.min.js"></script>
+<script type="text/javascript">
+    RED.nodes.registerType('OutgoingCall',{
+        category: 'Voice',
+        color: '#ffffff',
+        defaults: {
+          creds: {value:"", type:"vonagevoiceapp"},
+          number: {},
+          endpoint: {},
+          dest : { validate: function(n){
+            if (this.desttype == "phone"){
+                var x = n.replace(/\D/g,'')
+                var test = libphonenumber.isValidNumber('+'+x)
+                if (!test) {
+                    RED.notify(`${n} is not a valid phone number <br><i>Please use full international format</i>` ,{type: 'warning'})        
+                }
+                return test
+            } else if (this.desttype == "vbc") {
+                var reg = new RegExp('^\\d+$');         
+                return reg.test(n)
+            } else {
+                return true
+            }
+          }},
+          desttype : {}
+        },
+        inputs:1,
+        outputs:1,
+        icon: "vonage.png",
+        label: function () {
+            var ifn = libphonenumber.formatNumber("+"+this.number, 'INTERNATIONAL')
+            return ifn || 'Outgoing Call'
+        },
+        paletteLabel: "Outgoing Call",
+        oneditprepare: function () {
+            const frominput = document.getElementById("node-input-number-input");
+            const input = document.getElementById("node-input-number");
+            frominput.value = input.value;
+            frominput.addEventListener("focus", () => {
+                const chevron = document.getElementById("node-input-get-numbers");
+                const close = document.getElementById("node-input-clear-number");
+                chevron.style.display = "none";
+                close.style.display = "block";
+            })
+            $("#node-input-dest").typedInput({
+                type:"str",
+                types:["str", "msg", "flow","global"],
+                typeField: "#node-input-desttype"
+})
+        },
+        oneditsave: function () {
+            const frominput = document.getElementById("node-input-number-input");
+            const select = document.getElementById("node-input-number-select");
+            const input = document.getElementById("node-input-number");
+            input.value = select.value || frominput.value;
+        },
+        button: {
+            enabled: function() {
+                return !this.changed
+            },
+            visible: function() {
+                if (this.desttype == 'msg'){
+                    return false
+                } else {
+                    return true
+                }
+            },
+            onclick: function() {
+                if (this.changed) {
+                    return RED.notify(RED._("notification.warning", {message:RED._("notification.warnings.undeployedChanges")}),"warning");
+                }
+                var label = this._def.label.call(this);
+                if (label.length > 30) {
+                    label = label.substring(0,50)+"...";
+                }
+                label = label.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+                var node = this;
+                $.ajax({
+                    url: "outgoingInject/"+this.id,
+                    type:"POST",
+                    success: function(resp) {
+                        RED.notify(node._("inject.success",{label:label}),{type:"success",id:"inject"});
+                    },
+                    error: function(jqXHR,textStatus,errorThrown) {
+                        if (jqXHR.status == 404) {
+                            RED.notify(node._("common.notification.error",{message:node._("common.notification.errors.not-deployed")}),"error");
+                        } else if (jqXHR.status == 500) {
+                            RED.notify(node._("common.notification.error",{message:node._("inject.errors.failed")}),"error");
+                        } else if (jqXHR.status == 0) {
+                            RED.notify(node._("common.notification.error",{message:node._("common.notification.errors.no-response")}),"error");
+                        } else {
+                            RED.notify(node._("common.notification.error",{message:node._("common.notification.errors.unexpected",{status:jqXHR.status,message:textStatus})}),"error");
+                        }
+                    }
+                });
+            }
+        },        
+    });
+</script>
+<script type="text/x-red" data-template-name="OutgoingCall">
+  
+  <div class="form-row">
+      <label for="node-input-creds"></i>Application</label>
+      <input type="text" id="node-input-creds" >
+  </div>
+  <fieldset id='cli'>      
+    <legend>Caller ID</legend>   
+  <div class="form-row">
+    <label for="node-input-number"><i class="icon-tag"></i>Number</label>
+    <div style="display: inline-block; position: relative; width: 70%; height: 20px;">
+        <div style="position: absolute; left: 0px; right: 40px;">
+            <select type="text" id="node-input-number-select" style="width:100%; display: none;"></select>
+            </select>
+            <input type="text" id="node-input-number-input" style="width:100%;" placeholder=" Number">
+            <input type="hidden" id="node-input-number">
+        </div>
+    <a id="node-input-get-numbers" title="Lookup My Numbers" class="red-ui-button" style="position: absolute; right: 0px; top: 0px;" onclick="getnumbers()"><i class="fa fa-list"></i></a>
+    <a id="node-input-clear-number" title="Clear" class="red-ui-button" style="position: absolute; right: 0px; top: 0px; display:none;" onclick="clearnumber()"><i class="fa fa-times"></i></a>
+    <a id="node-input-edit-number" title="Switch to Manual Entry" class="red-ui-button" style="position: absolute; right: 0px; top: 0px; display:none;" onclick="editnumber()"><i class="fa fa-user-plus"></i></a>
+    </div>
+    </div>
+    </fieldset
+       
+    <fieldset id='destination'>      
+    <legend>Destination</legend>   
+    <div class="form-row">
+        <select type="text" id="node-input-endpoint" style="width:20%;" >
+            <option value="phone">Phone</option>
+            <option value="sip">SIP</option>
+            <option value="vbc">VBC</option>
+          </select>
+        <input type="text" id="node-input-dest" style="width:70%;">
+        <input type="hidden" id="node-input-desttype">
+    </div>
+    </fieldset
+
+  </div>
+
+
+
+  
+</script>
+
+
+<script type="text/x-red" data-help-name="OutgoingCall">
+<p>TODO</p>
+</script>
+
+
+<script>
+
+    function getnumbers() {
+        var url = 'vonageVoice/numbers';
+        var params = {
+            creds: document.getElementById("node-input-creds").value,
+        }
+        $.get(url, params, function (res) {
+            var select = document.getElementById("node-input-number-select");
+            while (select.options.length > 0) {
+                select.remove(0);
+            }
+            for (let index = 0; index < res.length; index++) {
+                const option = document.createElement("option");
+                option.value = res[index].msisdn;
+                option.text = libphonenumber.formatNumber("+"+res[index].msisdn, 'INTERNATIONAL')
+                select.add(option);
+            }
+
+            const input = document.getElementById("node-input-number-input");
+            const chevron = document.getElementById("node-input-get-numbers");
+            const edit = document.getElementById("node-input-edit-number");
+            select.style.display = "block";
+            input.style.display = "none";
+            chevron.style.display = "none";
+            edit.style.display = "block";
+        }, 'json'
+        );
+    }
+
+    function clearnumber() {
+        const input = document.getElementById("node-input-number-input");
+        const chevron = document.getElementById("node-input-get-numbers");
+        const close = document.getElementById("node-input-clear-number");
+        input.value = "";
+        chevron.style.display = "block";
+        close.style.display = "none";
+    }
+    function editnumber() {
+        const input = document.getElementById("node-input-number-input");
+        const select = document.getElementById("node-input-number-select");
+        const chevron = document.getElementById("node-input-get-numbers");
+        const edit = document.getElementById("node-input-edit-number");
+        select.value = "";
+        input.value = "";
+        select.style.display = "none";
+        input.style.display = "block";
+        edit.style.display = "none";
+        chevron.style.display = "block";
+    }
+</script> 
+

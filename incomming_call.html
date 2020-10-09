@@ -1,0 +1,121 @@
+<script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/libphonenumber-js/1.7.57/libphonenumber-js.min.js"></script>
+<script type="text/javascript">
+    RED.nodes.registerType('IncommingCall',{
+        category: 'Voice',
+        color: '#ffffff',
+        defaults: {
+          creds: {value:"", type:"vonagevoiceapp"},
+          number: {}
+        },
+        inputs:0,
+        outputs:1,
+        icon: "vonage.png",
+        label: function () {
+            var ifn = libphonenumber.formatNumber("+"+this.number, 'INTERNATIONAL')
+            return ifn || 'Incomming Call'
+        },
+        paletteLabel: "Incomming Call",
+        oneditprepare: function () {
+            const frominput = document.getElementById("node-input-number-input");
+            const input = document.getElementById("node-input-number");
+            frominput.value = input.value;
+            frominput.addEventListener("focus", () => {
+                const chevron = document.getElementById("node-input-get-numbers");
+                const close = document.getElementById("node-input-clear-number");
+                chevron.style.display = "none";
+                close.style.display = "block";
+            })
+        },
+        oneditsave: function () {
+            const frominput = document.getElementById("node-input-number-input");
+            const select = document.getElementById("node-input-number-select");
+            const input = document.getElementById("node-input-number");
+            input.value = select.value || frominput.value;
+        }        
+    });
+</script>
+<script type="text/x-red" data-template-name="IncommingCall">
+  
+  <div class="form-row">
+      <label for="node-input-creds"></i>Application</label>
+      <input type="text" id="node-input-creds" >
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-number"><i class="icon-tag"></i>Number</label>
+    <div style="display: inline-block; position: relative; width: 70%; height: 20px;">
+        <div style="position: absolute; left: 0px; right: 40px;">
+            <select type="text" id="node-input-number-select" style="width:100%; display: none;"></select>
+            </select>
+            <input type="text" id="node-input-number-input" style="width:100%;" placeholder=" Number">
+            <input type="hidden" id="node-input-number">
+        </div>
+    <a id="node-input-get-numbers" title="Lookup My Numbers" class="red-ui-button" style="position: absolute; right: 0px; top: 0px;" onclick="getnumbers()"><i class="fa fa-list"></i></a>
+    <a id="node-input-clear-number" title="Clear" class="red-ui-button" style="position: absolute; right: 0px; top: 0px; display:none;" onclick="clearnumber()"><i class="fa fa-times"></i></a>
+    <a id="node-input-edit-number" title="Switch to Manual Entry" class="red-ui-button" style="position: absolute; right: 0px; top: 0px; display:none;" onclick="editnumber()"><i class="fa fa-user-plus"></i></a>
+    </div>
+  </div>
+
+
+
+  
+</script>
+
+
+<script type="text/x-red" data-help-name="IncommingCall">
+<p>TODO</p>
+</script>
+
+
+<script>
+
+    function getnumbers() {
+        var url = 'vonageVoice/numbers';
+        var params = {
+            creds: document.getElementById("node-input-creds").value,
+        }
+        $.get(url, params, function (res) {
+            var select = document.getElementById("node-input-number-select");
+            while (select.options.length > 0) {
+                select.remove(0);
+            }
+            for (let index = 0; index < res.length; index++) {
+                const option = document.createElement("option");
+                option.value = res[index].msisdn;
+                option.text = libphonenumber.formatNumber("+"+res[index].msisdn, 'INTERNATIONAL')
+                select.add(option);
+            }
+
+            const input = document.getElementById("node-input-number-input");
+            const chevron = document.getElementById("node-input-get-numbers");
+            const edit = document.getElementById("node-input-edit-number");
+            select.style.display = "block";
+            input.style.display = "none";
+            chevron.style.display = "none";
+            edit.style.display = "block";
+        }, 'json'
+        );
+    }
+
+    function clearnumber() {
+        const input = document.getElementById("node-input-number-input");
+        const chevron = document.getElementById("node-input-get-numbers");
+        const close = document.getElementById("node-input-clear-number");
+        input.value = "";
+        chevron.style.display = "block";
+        close.style.display = "none";
+    }
+    function editnumber() {
+        const input = document.getElementById("node-input-number-input");
+        const select = document.getElementById("node-input-number-select");
+        const chevron = document.getElementById("node-input-get-numbers");
+        const edit = document.getElementById("node-input-edit-number");
+        select.value = "";
+        input.value = "";
+        select.style.display = "none";
+        input.style.display = "block";
+        edit.style.display = "none";
+        chevron.style.display = "block";
+    }
+</script> 
+

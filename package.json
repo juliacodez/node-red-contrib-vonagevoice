@@ -1,0 +1,43 @@
+{
+    "name": "node-red-contrib-vonagevoice",
+    "version": "0.0.1",
+    "description": "Package for building call workflows with the Vonage Voice API",
+    "author": "Sam Machin",
+    "license": "MIT",
+    "homepage": "https://github.com/smachin-vonage/node-red-contrib-vonagevoice",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/smachin-vonage/node-red-contrib-vonagevoice.git"
+    },
+    "keywords": [
+        "node-red",
+        "vonage",
+        "Voice API",
+        "IVR"
+    ],
+    "node-red": {
+        "nodes": {
+            "vonageauth": "vonageauth.js",
+            "incommingcall": "incomming_call.js",
+            "greeting": "greeting.js",
+            "endcall": "endcall.js",
+            "senddtmf": "send_dtmf.js",
+            "getdigits" : "get_digits.js",
+            "menu" : "menu.js",
+            "connectcall" : "connect_call.js",
+            "outgoingcall": "outgoing_call.js",
+            "recordcall": "record_call.js",
+            "recordmessage": "record_message.js",
+            "conference" : "conference.js",
+            "speechreq" : "speech_req.js"
+        }
+    },
+    "dependencies": {
+        "atob": "^2.1.2",
+        "body-parser": "^1.19.0",
+        "btoa": "^1.2.1",
+        "multer": "^1.4.2",
+        "mustache": "^4.0.1",
+        "nexmo": "^2.8.0"
+    }
+}
