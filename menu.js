@@ -34,13 +34,13 @@ module.exports = function (RED) {
           var ncco = {};
           ncco.action="stream";
           var f = this.file_url.split('/').slice(-1)[0] 
-          ncco.streamUrl=[msg.app.credentials.baseurl+"/"+f];
+          ncco.streamUrl=[msg.app.baseurl+"/"+f];
           ncco.bargeIn = true
           msg.ncco.push(ncco);
       }
       var ncco = {};
       ncco.action="input";
-      ncco.eventUrl=[msg.app.credentials.baseurl+"/vonageVoice/menu/"+node.id+"?call="+btoa(JSON.stringify(msg.call))+"&app_node_id="+msg.app.id];
+      ncco.eventUrl=[msg.app.baseurl+"/vonageVoice/menu/"+node.id+"?call="+btoa(JSON.stringify(msg.call))+"&app_node_id="+msg.app.id];
       ncco.dtmf={}
       ncco.dtmf.maxDigits = 1
       msg.ncco.push(ncco);

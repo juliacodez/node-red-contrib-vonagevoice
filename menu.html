@@ -27,13 +27,15 @@
             return this.name || 'Menu'
         },
         oneditprepare: function (){
-            var data = this.valid_digits.split(",")
+            if (this.valid_digits != null) {
+                var data = this.valid_digits.split(",")
             for (i in data){
                 let id = data[i]
                 if (id.length == 1){
                     let e = document.getElementById(id)
                     e.checked = true
                 }
+            }
             }
             var voicename = this.voicename
             jQuery.ajax({

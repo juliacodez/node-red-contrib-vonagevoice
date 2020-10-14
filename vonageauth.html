@@ -2,23 +2,26 @@
     RED.nodes.registerType('vonagevoiceapp',{
         category: 'config',
         defaults: {
-          name: {}
+          name: {},
+          utype: {},
+          baseurl: {},
+          appid: {}
         },
          credentials: {
            apikey: {type:"text"},
            apisecret: {type:"text"},
-           baseurl: {type:"text"},
-           appid: {type:"text"},
            privatekey: {type:"text"}
         },
         label: function() {
             return this.name;
         },
         oneditsave: function() {
+          console.log(this.baseurl)
           if ($('#node-config-input-baseurl').val() != this.baseurl){
             updatevoiceapp();
-
           }
+          console.log(this.utype)
+          console.log(this.baseurl)
         },
         oneditprepare: function() {
           if (this.credentials.apikey != undefined){
@@ -27,8 +30,12 @@
           if (this.credentials.apisecret != undefined){
             $('#node-config-input-apisecret').prop("disabled", true)
           }
-          if (this.credentials.appid != undefined){
+          if (this.appid != undefined){
             $('#create_button').hide()
+          }
+          
+          if ($('#node-config-input-utype').val() === null && this.baseurl === undefined){
+            console.log('new dynamic')
           }
         }
     });
@@ -51,9 +58,18 @@
   </div>
   
   <div class="form-row">
-      <label for="node-config-input-baseurl"></i>Base URL</label>
-      <input type="text" id="node-config-input-baseurl" placeholder="http://example.com:1880">
+    <label for="node-config-input-utype">Base URL</label>
+    <select type="text" id="node-config-input-utype" style="width:70%;" onchange="toggleUrlType(this.value)">
+      <option value="dynamic">Autodetect</option>
+      <option value="static">Set my URL</option>
+     </select>
   </div>
+  
+  <div class="form-row" id="base_url"  style="display: none;">
+      <label for="node-config-input-baseurl"></i>Base URL</label>
+      <input type="text" id="node-config-input-baseurl" placeholder="http://example.com">
+  </div>
+
   <div class="form-row" id="create_button">
     <button id="button" class="red-ui-button" onclick="newnexmovoiceapp()">Create New Application</button><br>   
   </div>
@@ -75,6 +91,16 @@
 
 
 <script>
+  function toggleUrlType(v){
+    if (v == 'dynamic'){
+        document.getElementById("base_url").style.display = "none";
+ 
+      }
+      else if (v == 'static'){
+        document.getElementById("base_url").style.display = "block";
+      } 
+
+  }
 
   function newnexmovoiceapp(){
       var url = 'vonageVoice/new-voice-app';
@@ -87,7 +113,7 @@
       $.post(url, params, function(res){
         document.getElementById("node-config-input-appid").value = res.id;
         document.getElementById("node-config-input-privatekey").value = res.keys.private_key;
-        document.getElementById("create_button").style = none
+        document.getElementById("create_button").style.display = none
         }, 'json'
       );
   }

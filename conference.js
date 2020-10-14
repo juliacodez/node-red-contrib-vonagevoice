@@ -25,7 +25,7 @@ module.exports = function (RED) {
       ncco.name = this.name
       if (this.recordingout != 'no'){
         ncco.record = true
-        ncco.eventUrl = ncco.eventUrl=[msg.app.credentials.baseurl+"/vonageVoice/record_conf/"+node.id+"?call="+btoa(JSON.stringify(msg.call))+"&app_node_id="+msg.app.id];
+        ncco.eventUrl = ncco.eventUrl=[msg.app.baseurl+"/vonageVoice/record_conf/"+node.id+"?call="+btoa(JSON.stringify(msg.call))+"&app_node_id="+msg.app.id];
       }
       if (this.moderation == "true"){
         ncco.startOnEnter = this.startOnEnter 
@@ -49,7 +49,7 @@ module.exports = function (RED) {
     const nexmo = new Nexmo({
       apiKey: appnode.credentials.apikey,
       apiSecret: appnode.credentials.apisecret,
-      applicationId: appnode.credentials.appid,
+      applicationId: appnode.appid,
       privateKey:appnode.credentials.privatekey
       }, {debug: false, appendToUserAgent: "nexmo-nodered/"+version}
     );

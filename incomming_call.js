@@ -13,7 +13,7 @@ module.exports = function(RED) {
         this.number = n.number;
         this.apikey = this.creds.credentials.apikey
         this.apisecret = this.creds.credentials.apisecret
-        this.appid = this.creds.credentials.appid
+        this.appid = this.creds.appid
         incommingCallNodes[this.number] = node.id
         //Link Number to App
         const nexmo = new Nexmo({
@@ -22,7 +22,7 @@ module.exports = function(RED) {
           }, {debug: false, appendToUserAgent: "nexmo-nodered/"+version});
         nexmo.number.get({pattern: this.number, search_pattern: 0 }, (error, result) => {
             if(error) {
-              console.error(JSON.stringify(err))
+              console.error(JSON.stringify(error))
               node.error(err)
               node.status({fill:"red",shape:"ring",text:"Linking Unknown"});
             }

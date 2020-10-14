@@ -36,12 +36,12 @@ module.exports = function (RED) {
           ncco.action="stream";
           ncco.bargeIn=true
           var f = this.file_url.split('/').slice(-1)[0] 
-          ncco.streamUrl=[msg.app.credentials.baseurl+"/"+f];
+          ncco.streamUrl=[msg.app.baseurl+"/"+f];
           msg.ncco.push(ncco);
       }
       var ncco = {};
       ncco.action="input";
-      ncco.eventUrl=[msg.app.credentials.baseurl+"/vonageVoice/speech_req/"+node.id+"?call="+btoa(JSON.stringify(msg.call))+"&app_node_id="+msg.app.id];
+      ncco.eventUrl=[msg.app.baseurl+"/vonageVoice/speech_req/"+node.id+"?call="+btoa(JSON.stringify(msg.call))+"&app_node_id="+msg.app.id];
       ncco.speech={}
       ncco.speech.language = this.language 
       ncco.speech.context = this.rules

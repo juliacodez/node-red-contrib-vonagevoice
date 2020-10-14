@@ -12,7 +12,7 @@ module.exports = function(RED) {
         this.endpoint = n.endpoint
         this.apikey = this.creds.credentials.apikey
         this.apisecret = this.creds.credentials.apisecret
-        this.appid = this.creds.credentials.appid
+        this.appid = this.creds.appid
         this.privatekey = this.creds.credentials.privatekey
         this.baseurl = this.creds.credentials.baseurl
         node.on('input', function (msg) {

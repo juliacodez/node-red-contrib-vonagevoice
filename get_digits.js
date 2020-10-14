@@ -32,12 +32,12 @@ module.exports = function (RED) {
           ncco.action="stream";
           ncco.bargeIn=true
           var f = this.file_url.split('/').slice(-1)[0] 
-          ncco.streamUrl=[msg.app.credentials.baseurl+"/"+f];
+          ncco.streamUrl=[msg.app.aseurl+"/"+f];
           msg.ncco.push(ncco);
       }
       var ncco = {};
       ncco.action="input";
-      ncco.eventUrl=[msg.app.credentials.baseurl+"/vonageVoice/get_digits/"+node.id+"?call="+btoa(JSON.stringify(msg.call))+"&app_node_id="+msg.app.id];
+      ncco.eventUrl=[msg.app.baseurl+"/vonageVoice/get_digits/"+node.id+"?call="+btoa(JSON.stringify(msg.call))+"&app_node_id="+msg.app.id];
       ncco.dtmf={}
       ncco.dtmf.timeOut = config.timeout 
       ncco.dtmf.maxdigits = config.maxdigits

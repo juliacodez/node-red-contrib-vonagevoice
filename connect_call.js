@@ -19,21 +19,21 @@ module.exports = function (RED) {
         ncco.from = msg.call.lvn
         ncco.endpoint = [{type : 'phone', number : this.dest}]
         ncco.eventMethod = "POST"
-        ncco.eventUrl = [msg.app.credentials.baseurl+"/vonageVoice/connect_call/"+node.id+"?call="+btoa(JSON.stringify(msg.call))+"&app_node_id="+msg.app.id]
+        ncco.eventUrl = [msg.app.baseurl+"/vonageVoice/connect_call/"+node.id+"?call="+btoa(JSON.stringify(msg.call))+"&app_node_id="+msg.app.id]
         break;
       case "sip":
         var ncco = {};
         ncco.action="connect";
         ncco.endpoint = [{type : 'sip', uri : this.dest}]
         ncco.eventMethod = "POST"
-        ncco.eventUrl = [msg.app.credentials.baseurl+"/vonageVoice/connect_call/"+node.id+"?call="+btoa(JSON.stringify(msg.call))+"&app_node_id="+msg.app.id]
+        ncco.eventUrl = [msg.app.baseurl+"/vonageVoice/connect_call/"+node.id+"?call="+btoa(JSON.stringify(msg.call))+"&app_node_id="+msg.app.id]
         break;
       case "vbc":
           var ncco = {};
           ncco.action="connect";
           ncco.endpoint = [{type : 'vbc', extension : this.dest}]
           ncco.eventMethod = "POST"
-          ncco.eventUrl = [msg.app.credentials.baseurl+"/vonageVoice/connect_call/"+node.id+"?call="+btoa(JSON.stringify(msg.call))+"&app_node_id="+msg.app.id]
+          ncco.eventUrl = [msg.app.baseurl+"/vonageVoice/connect_call/"+node.id+"?call="+btoa(JSON.stringify(msg.call))+"&app_node_id="+msg.app.id]
           break;
       }
       msg.ncco.push(ncco);

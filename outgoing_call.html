@@ -28,7 +28,7 @@
         outputs:1,
         icon: "vonage.png",
         label: function () {
-            var ifn = libphonenumber.formatNumber("+"+this.number, 'INTERNATIONAL')
+            var ifn = libphonenumber.formatNumber("+"+this.dest, 'INTERNATIONAL')
             return ifn || 'Outgoing Call'
         },
         paletteLabel: "Outgoing Call",

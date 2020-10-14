@@ -27,7 +27,7 @@ module.exports = function (RED) {
         var ncco = {};
         ncco.action="stream";
         var f = config.file_url.split('/').slice(-1)[0] 
-        ncco.streamUrl=[msg.app.credentials.baseurl+"/"+f];
+        ncco.streamUrl=[msg.app.baseurl+"/"+f];
         msg.ncco.push(ncco);
         node.send(msg);
       });

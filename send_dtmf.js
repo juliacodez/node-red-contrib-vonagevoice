@@ -13,7 +13,7 @@ module.exports = function (RED) {
       ncco.action="notify";
       ncco.payload = {call : msg.call, app_node_id : msg.app.id, digits: this.digits}
       ncco.eventMethod = "POST"
-      ncco.eventUrl = [msg.app.credentials.baseurl+"/vonageVoice/send_dtmf/"+node.id]
+      ncco.eventUrl = [msg.app.baseurl+"/vonageVoice/send_dtmf/"+node.id]
       msg.ncco.push(ncco);
       msg.res._res.status(200).jsonp(msg.ncco);
     });       

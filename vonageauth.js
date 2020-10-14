@@ -1,25 +1,72 @@
 const Nexmo = require('nexmo');
 const version = require('./package.json').version
+const request = require('request');
 
 
 module.exports = function(RED) {
   function vonagevoiceapp(n){
    RED.nodes.createNode(this, n);
-   this.apikey = n.apikey;
-   this.apisecret = n.apisecret;
-   this.name = n.name;
-   this.baseurl = n.baserurl; // TODO Consider moving to env var
+   var node = this
+   this.utype = n.utype
    this.appid = n.appid;
-   this.privatekey = n.privatekey;
- }
+   this.name = n.name
+   if (this.utype == 'dynamic'){
+    try {
+      var r = request('http://127.0.0.1:4040/api/tunnels', function (error, response, body) {
+        if (error){
+          node.baseurl = process.env.EXTERNALURL || "http://example.com"
+          updateApp(node.appid, node.name, node.baseurl, node.credentials.apikey, node.credentials.apisecret)
+        } else {
+          if (response.statusCode == 200){
+            var data = JSON.parse(body)
+            node.baseurl= data.tunnels[1].public_url
+            updateApp(node.appid, node.name, node.baseurl, node.credentials.apikey, node.credentials.apisecret)          
+          } else {
+            node.baseurl = process.env.EXTERNALURL || "http://example.com"
+            updateApp(node.appid, node.name, node.baseurl, node.credentials.apikey, node.credentials.apisecret)    
+          }      
+        }
+      });
+    } catch (err) {
+      node.baseurl = process.env.EXTERNALURL || "http://example.com"
+      updateApp(node.appid, node.name, node.baseurl, node.credentials.apikey, node.credentials.apisecret)    
+    }
+   } else {
+    node.baseurl = n.baseurl;
+    updateApp(node.appid, node.name, node.baseurl, node.credentials.apikey, node.credentials.apisecret)   
+   }
+  }
+
+  function updateApp(appid, name, baseurl, apikey, apisecret){
+    const nexmo = new Nexmo({apiKey: apikey, apiSecret: apisecret}, {debug: false, appendToUserAgent: "nexmo-nodered/"+version});
+    const data = {
+      name: name,
+      capabilities: {
+        voice: {
+        webhooks: {
+          answer_url: {
+            address: baseurl + '/vonageVoice/answer',
+            http_method: "GET"
+          },
+          event_url: {
+            address: baseurl + '/vonageVoice/event',
+            http_method: "POST"
+          }
+        } 
+        }
+      }
+    };
+    nexmo.app.update(appid, data, function(error, response){
+      if (error) {console.error(error)}
+    });
+  }
+
 
   RED.nodes.registerType("vonagevoiceapp",vonagevoiceapp,{
     credentials: {
       apikey: {type:"text"},
       apisecret: {type:"text"},
-      privatekey: {type:"text"},
-      appid: {type:"text"},
-      baseurl: {type:"text"}
+      privatekey: {type:"text"}
    }
   });
 

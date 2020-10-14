@@ -18,7 +18,7 @@ module.exports = function (RED) {
     node.on('input', function (msg) {
       var ncco = {};
       ncco.action="record";
-      ncco.eventUrl=[msg.app.credentials.baseurl+"/vonageVoice/record_call/"+node.id+"?call="+btoa(JSON.stringify(msg.call))+"&app_node_id="+msg.app.id];
+      ncco.eventUrl=[msg.app.baseurl+"/vonageVoice/record_call/"+node.id+"?call="+btoa(JSON.stringify(msg.call))+"&app_node_id="+msg.app.id];
       msg.ncco.push(ncco);
       node.send([msg,])
     });       
@@ -36,7 +36,7 @@ module.exports = function (RED) {
     const nexmo = new Nexmo({
       apiKey: appnode.credentials.apikey,
       apiSecret: appnode.credentials.apisecret,
-      applicationId: appnode.credentials.appid,
+      applicationId: appnode.appid,
       privateKey:appnode.credentials.privatekey
       }, {debug: false, appendToUserAgent: "nexmo-nodered/"+version}
     );
