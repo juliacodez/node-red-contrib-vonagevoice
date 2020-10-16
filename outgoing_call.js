@@ -7,22 +7,22 @@ module.exports = function(RED) {
     function OutgoingCall(n) {
         RED.nodes.createNode(this,n);
         var node = this;
-        this.creds = RED.nodes.getNode(n.creds);
+        node.on('input', function (msg) {
+          this.creds = RED.nodes.getNode(n.creds);
         this.number = n.number;
         this.endpoint = n.endpoint
         this.apikey = this.creds.credentials.apikey
         this.apisecret = this.creds.credentials.apisecret
         this.appid = this.creds.appid
         this.privatekey = this.creds.credentials.privatekey
-        this.baseurl = this.creds.credentials.baseurl
-        node.on('input', function (msg) {
-          this.dest = RED.util.evaluateNodeProperty(n.dest, n.desttype, this, msg)
-          const nexmo = new Nexmo({
+        this.baseurl = this.creds.baseurl
+        this.dest = RED.util.evaluateNodeProperty(n.dest, n.desttype, this, msg)
+        const nexmo = new Nexmo({
             apiKey: this.apikey,
             apiSecret: this.apisecret,
             applicationId: this.appid,
             privateKey: this.privatekey
-            }, {debug: false, appendToUserAgent: "vonagevoice-nodered/"+version});
+            }, {debug: true, appendToUserAgent: "vonagevoice-nodered/"+version});
           if (this.endpoint == "phone"){
             var ep = {}
             ep.type = "phone"
@@ -42,7 +42,7 @@ module.exports = function(RED) {
             answer_url: [this.baseurl+"/vonageVoice/outgoing/"+node.id],
             answer_method : "GET"
           };
-          nexmo.calls.create(request, (err, response) => {
+        nexmo.calls.create(request, (err, response) => {
             if(err) { console.error(err); }
           });  
         });  

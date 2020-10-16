@@ -1,6 +1,6 @@
 {
     "name": "node-red-contrib-vonagevoice",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "Package for building call workflows with the Vonage Voice API",
     "author": "Sam Machin",
     "license": "MIT",

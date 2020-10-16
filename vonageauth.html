@@ -103,12 +103,17 @@
   }
 
   function newnexmovoiceapp(){
+    if (document.getElementById("node-config-input-utype").value == 'dynamic'){
+      var base_url = 'http://example.com'
+    } else {
+      var base_url = document.getElementById("node-config-input-baseurl").value
+    }
       var url = 'vonageVoice/new-voice-app';
       var params = {
         api_key:  document.getElementById("node-config-input-apikey").value,
         api_secret: document.getElementById("node-config-input-apisecret").value,
         name : document.getElementById("node-config-input-name").value,
-        base_url : document.getElementById("node-config-input-baseurl").value
+        base_url : base_url
       }
       $.post(url, params, function(res){
         document.getElementById("node-config-input-appid").value = res.id;
@@ -118,14 +123,19 @@
       );
   }
 
-  function updatevoiceapp(){
+  function updatevoiceapp(){  
+    if (document.getElementById("node-config-input-utype").value == 'dynamic'){
+      var base_url = 'http://example.com'
+    } else {
+      var base_url = document.getElementById("node-config-input-baseurl").value
+    }
       var app_id =  document.getElementById("node-config-input-appid").value
       var url = 'vonageVoice/update-voice-app/'+app_id;
       var params = {
         api_key:  document.getElementById("node-config-input-apikey").value,
         api_secret: document.getElementById("node-config-input-apisecret").value,
         name : document.getElementById("node-config-input-name").value,
-        base_url : document.getElementById("node-config-input-baseurl").value
+        base_url : base_url
       }
       $.post(url, params)
   }
