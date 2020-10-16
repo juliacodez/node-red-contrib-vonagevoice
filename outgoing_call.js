@@ -121,25 +121,32 @@ RED.httpAdmin.post("/outgoingInject/:id", RED.auth.needsPermission("inject.write
       res.sendStatus(404);
   }
 });
-
 // Admin API to List Numbers
 RED.httpAdmin.get('/vonageVoice/numbers', RED.auth.needsPermission('vonage.write'), function(req,res){
-        const creds = RED.nodes.getNode(req.query.creds);
-        const nexmo = new Nexmo({
-          apiKey: creds.credentials.apikey,
-          apiSecret: creds.credentials.apisecret
-          }, {debug: false, appendToUserAgent: "vonagevoice-nodered/"+version}
-        );
-        nexmo.number.get({}, 
-          (err, response) => {
-            if (err) {
-              console.error(err)
-            } else {
-              res.send(response.numbers);
-            }
-          })        
-   });
+  if (req.query.creds){
+    const creds = RED.nodes.getNode(req.query.creds);
+    var api_key = creds.credentials.api_key
+    var api_secret = creds.credentials.api_secret
+  } else if (req.query.apikey){
+    var api_key = req.query.api_key
+    var api_secret = req.query.api_secret
+  } else {
+    res.status(401)
+  }
+  const nexmo = new Nexmo({
+    apiKey: api_key,
+    apiSecret: api_secret
+    }, {debug: false, appendToUserAgent: "vonagevoice-nodered/"+version}
+  );
+  nexmo.number.get({}, 
+    (err, response) => {
+      if (err) {
+        console.error(err)
+      } else {
+        res.send(response.numbers);
+      }
+    })        
+});
 
-   
     
 }

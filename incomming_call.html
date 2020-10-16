@@ -68,11 +68,18 @@
 
 
 <script>
-
     function getnumbers() {
+        var creds =  RED.nodes.node(document.getElementById("node-input-creds").value)
         var url = 'vonageVoice/numbers';
-        var params = {
-            creds: document.getElementById("node-input-creds").value,
+        if (creds.credentials){
+            var params = {
+            api_key: creds.credentials.apikey,
+            api_secret : creds.credentials.apisecret
+            }
+        } else {
+            var params = {
+            creds: creds.id,
+            }
         }
         $.get(url, params, function (res) {
             var select = document.getElementById("node-input-number-select");

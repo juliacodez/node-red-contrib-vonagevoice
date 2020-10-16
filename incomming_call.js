@@ -116,10 +116,19 @@ function createResponseWrapper(res) {
 
 // Admin API to List Numbers
 RED.httpAdmin.get('/vonageVoice/numbers', RED.auth.needsPermission('vonage.write'), function(req,res){
-        const creds = RED.nodes.getNode(req.query.creds);
+        if (req.query.creds){
+          const creds = RED.nodes.getNode(req.query.creds);
+          var api_key = creds.credentials.apikey
+          var api_secret = creds.credentials.apisecret
+        } else if (req.query.api_key){
+          var api_key = req.query.api_key
+          var api_secret = req.query.api_secret
+        } else {
+          res.status(401)
+        }
         const nexmo = new Nexmo({
-          apiKey: creds.credentials.apikey,
-          apiSecret: creds.credentials.apisecret
+          apiKey: api_key,
+          apiSecret: api_secret
           }, {debug: false, appendToUserAgent: "vonagevoice-nodered/"+version}
         );
         nexmo.number.get({}, 
