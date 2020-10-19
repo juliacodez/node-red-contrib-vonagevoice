@@ -16,12 +16,9 @@
             return this.name;
         },
         oneditsave: function() {
-          console.log(this.baseurl)
           if ($('#node-config-input-baseurl').val() != this.baseurl){
             updatevoiceapp();
           }
-          console.log(this.utype)
-          console.log(this.baseurl)
         },
         oneditprepare: function() {
           if (this.credentials.apikey != undefined){
@@ -30,13 +27,10 @@
           if (this.credentials.apisecret != undefined){
             $('#node-config-input-apisecret').prop("disabled", true)
           }
-          if (this.appid != undefined){
+          if (this.appid.length >= 1 ){
             $('#create_button').hide()
           }
           
-          if ($('#node-config-input-utype').val() === null && this.baseurl === undefined){
-            console.log('new dynamic')
-          }
         }
     });
 </script>
