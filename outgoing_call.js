@@ -22,7 +22,7 @@ module.exports = function(RED) {
             apiSecret: this.apisecret,
             applicationId: this.appid,
             privateKey: this.privatekey
-            }, {debug: true, appendToUserAgent: "vonagevoice-nodered/"+version});
+            }, {debug: false, appendToUserAgent: "vonagevoice-nodered/"+version});
           if (this.endpoint == "phone"){
             var ep = {}
             ep.type = "phone"

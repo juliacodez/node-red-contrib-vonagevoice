@@ -83,30 +83,6 @@
 </script>
 
 
-<script>
-    function toggleOutput(endpoint){
-      if (endpoint == 'file'){
-        document.getElementById("filename").style.display = "block"; 
-      }
-      else {
-        document.getElementById("filename").style.display = "none";
-      }
-    }
-
-    function updateSilence(seconds){
-      if (seconds == 0) {
-        document.getElementById('endonsilence').value = 'No'
-      } else {
-        document.getElementById('endonsilence').value = seconds
-      }
-      
-    }
-
-    function updateTimeout(seconds){
-        document.getElementById('timeout').value = seconds
-     
-    }
-  </script>
 
 
 <script type="text/x-red" data-help-name="record_message">

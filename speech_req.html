@@ -194,47 +194,6 @@
 </script>
 
 
-<script>
-    function updateConfidence(v){
-        document.getElementById('confidence').value = v+"%"
-     
-    } 
-    function toggleType(endpoint){
-      if (endpoint == 'talk'){
-        document.getElementById("talk").style.display = "block";
-        document.getElementById("stream").style.display = "none";
- 
-      }
-      else if (endpoint == 'stream'){
-        document.getElementById("talk").style.display = "none";
-        document.getElementById("stream").style.display = "block";
-      } else {
-        document.getElementById("talk").style.display = "none";
-        document.getElementById("stream").style.display = "none";  
-      }
-    }
-
-    function uploadFile(file){
-        var data = new FormData();
-        data.append('file', file.files[0]);
-        jQuery.ajax({
-            type: 'POST',
-            url:"vonageVoice/upload",
-            data: data,
-            processData: false, 
-            contentType: false, 
-            success: function(returnval) {
-                document.getElementById("node-input-file_url").value = returnval
-                document.getElementById("upload").style.display = "none";
-                document.getElementById("url").style.display = "block";
-            },
-            error: function(e){
-                RED.notify(e.responseText, {type: 'error'});
-                file.value = null;
-            }
-        });
-    }   
-  </script>
 
 
 <script type="text/x-red" data-help-name="speech_req">

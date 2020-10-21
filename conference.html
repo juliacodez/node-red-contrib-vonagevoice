@@ -95,27 +95,7 @@
 </script>
 
 
-<script>
-    function toggleRecOutput(endpoint){
-      if (endpoint == 'file'){
-        document.getElementById("filename").style.display = "block"; 
-      }
-      else {
-        document.getElementById("filename").style.display = "none";
-      }
-    }
 
-    function toggleModeration(type){
-        if (type.value == "moderated"){
-            document.getElementById("moderation_options").style.display = "block"; 
-            document.getElementById("node-input-moderation").value = true
-      }
-      else {
-        document.getElementById("moderation_options").style.display = "none";
-        document.getElementById("node-input-moderation").value = false
-      }  
-    }
-  </script>
 
 
 <script type="text/x-red" data-help-name="conference">

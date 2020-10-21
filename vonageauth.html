@@ -84,55 +84,221 @@
 </script>
 
 
+    
+    
 <script>
-  function toggleUrlType(v){
-    if (v == 'dynamic'){
-        document.getElementById("base_url").style.display = "none";
- 
-      }
-      else if (v == 'static'){
-        document.getElementById("base_url").style.display = "block";
-      } 
+  function toggleType(endpoint){
+    if (endpoint == 'talk'){
+      document.getElementById("talk").style.display = "block";
+      document.getElementById("stream").style.display = "none";
 
+    }
+    else if (endpoint == 'stream'){
+      document.getElementById("talk").style.display = "none";
+      document.getElementById("stream").style.display = "block";
+    } 
   }
 
-  function newnexmovoiceapp(){
-    if (document.getElementById("node-config-input-utype").value == 'dynamic'){
-      var base_url = 'http://example.com'
-    } else {
-      var base_url = document.getElementById("node-config-input-baseurl").value
+  function uploadFile(file){
+      var data = new FormData();
+      data.append('file', file.files[0]);
+      jQuery.ajax({
+          type: 'POST',
+          url:"vonageVoice/upload",
+          data: data,
+          processData: false, 
+          contentType: false, 
+          success: function(returnval) {
+              document.getElementById("node-input-file_url").value = returnval
+              document.getElementById("upload").style.display = "none";
+              document.getElementById("url").style.display = "block";
+          },
+          error: function(e){
+              let myNotification = RED.notify(e.responseText, {
+                  type: 'error', 
+                  fixed: true, 
+                  buttons: [{
+                      'text': 'okay',
+                      'class': 'primary',
+                      'click': function(e) {
+                          myNotification.close()
+                      }
+                  }]
+              });
+          file.value = null;
+          }
+      });
+  }   
+
+  function toggleRecOutput(endpoint){
+    if (endpoint == 'file'){
+      document.getElementById("filename").style.display = "block"; 
     }
-      var url = 'vonageVoice/new-voice-app';
-      var params = {
-        api_key:  document.getElementById("node-config-input-apikey").value,
-        api_secret: document.getElementById("node-config-input-apisecret").value,
-        name : document.getElementById("node-config-input-name").value,
-        base_url : base_url
+    else {
+      document.getElementById("filename").style.display = "none";
+    }
+  }
+
+  function toggleModeration(type){
+      if (type.value == "moderated"){
+          document.getElementById("moderation_options").style.display = "block"; 
+          document.getElementById("node-input-moderation").value = true
+    }
+    else {
+      document.getElementById("moderation_options").style.display = "none";
+      document.getElementById("node-input-moderation").value = false
+    }  
+  }
+
+  function getnumbers() {
+      var creds =  RED.nodes.node(document.getElementById("node-input-creds").value)
+      var url = 'vonageVoice/numbers';
+      if (creds.credentials){
+          var params = {
+          api_key: creds.credentials.apikey,
+          api_secret : creds.credentials.apisecret
+          }
+      } else {
+          var params = {
+          creds: creds.id,
+          }
       }
-      $.post(url, params, function(res){
-        document.getElementById("node-config-input-appid").value = res.id;
-        document.getElementById("node-config-input-privatekey").value = res.keys.private_key;
-        document.getElementById("create_button").style.display = none
-        }, 'json'
+      $.get(url, params, function (res) {
+          var select = document.getElementById("node-input-number-select");
+          while (select.options.length > 0) {
+              select.remove(0);
+          }
+          for (let index = 0; index < res.length; index++) {
+              const option = document.createElement("option");
+              option.value = res[index].msisdn;
+              option.text = libphonenumber.formatNumber("+"+res[index].msisdn, 'INTERNATIONAL')
+              select.add(option);
+          }
+
+          const input = document.getElementById("node-input-number-input");
+          const chevron = document.getElementById("node-input-get-numbers");
+          const edit = document.getElementById("node-input-edit-number");
+          select.style.display = "block";
+          input.style.display = "none";
+          chevron.style.display = "none";
+          edit.style.display = "block";
+      }, 'json'
       );
   }
 
-  function updatevoiceapp(){  
-    if (document.getElementById("node-config-input-utype").value == 'dynamic'){
-      var base_url = 'http://example.com'
-    } else {
-      var base_url = document.getElementById("node-config-input-baseurl").value
-    }
-      var app_id =  document.getElementById("node-config-input-appid").value
-      var url = 'vonageVoice/update-voice-app/'+app_id;
-      var params = {
-        api_key:  document.getElementById("node-config-input-apikey").value,
-        api_secret: document.getElementById("node-config-input-apisecret").value,
-        name : document.getElementById("node-config-input-name").value,
-        base_url : base_url
-      }
-      $.post(url, params)
+  function clearnumber() {
+      const input = document.getElementById("node-input-number-input");
+      const chevron = document.getElementById("node-input-get-numbers");
+      const close = document.getElementById("node-input-clear-number");
+      input.value = "";
+      chevron.style.display = "block";
+      close.style.display = "none";
   }
+  function editnumber() {
+      const input = document.getElementById("node-input-number-input");
+      const select = document.getElementById("node-input-number-select");
+      const chevron = document.getElementById("node-input-get-numbers");
+      const edit = document.getElementById("node-input-edit-number");
+      select.value = "";
+      input.value = "";
+      select.style.display = "none";
+      input.style.display = "block";
+      edit.style.display = "none";
+      chevron.style.display = "block";
+  }
+
+  function toggleInputType(v){
+      if (v == 'button') {
+          $("#node-input-inputs").val(0)
+      } else if (v == 'port') {
+          $("#node-input-inputs").val(1)
+      }    
+  }
+
+  function toggleOutput(endpoint){
+    if (endpoint == 'file'){
+      document.getElementById("filename").style.display = "block"; 
+    }
+    else {
+      document.getElementById("filename").style.display = "none";
+    }
+  }
+
+  function toggleOutput(endpoint){
+    if (endpoint == 'file'){
+      document.getElementById("filename").style.display = "block"; 
+    }
+    else {
+      document.getElementById("filename").style.display = "none";
+    }
+  }
+
+  function updateSilence(seconds){
+    if (seconds == 0) {
+      document.getElementById('endonsilence').value = 'No'
+    } else {
+      document.getElementById('endonsilence').value = seconds
+    }
+    
+  }
+
+  function updateTimeout(seconds){
+      document.getElementById('timeout').value = seconds
+   
+  }
+
+  function updateConfidence(v){
+      document.getElementById('confidence').value = v+"%"
+   
+  } 
+
+  function toggleUrlType(v){
+  if (v == 'dynamic'){
+      document.getElementById("base_url").style.display = "none";
+
+    }
+    else if (v == 'static'){
+      document.getElementById("base_url").style.display = "block";
+    } 
+
+}
+
+function newnexmovoiceapp(){
+  if (document.getElementById("node-config-input-utype").value == 'dynamic'){
+    var base_url = 'http://example.com'
+  } else {
+    var base_url = document.getElementById("node-config-input-baseurl").value
+  }
+    var url = 'vonageVoice/new-voice-app';
+    var params = {
+      api_key:  document.getElementById("node-config-input-apikey").value,
+      api_secret: document.getElementById("node-config-input-apisecret").value,
+      name : document.getElementById("node-config-input-name").value,
+      base_url : base_url
+    }
+    $.post(url, params, function(res){
+      document.getElementById("node-config-input-appid").value = res.id;
+      document.getElementById("node-config-input-privatekey").value = res.keys.private_key;
+      document.getElementById("create_button").style.display = none
+      }, 'json'
+    );
+}
+
+function updatevoiceapp(){  
+  if (document.getElementById("node-config-input-utype").value == 'dynamic'){
+    var base_url = 'http://example.com'
+  } else {
+    var base_url = document.getElementById("node-config-input-baseurl").value
+  }
+    var app_id =  document.getElementById("node-config-input-appid").value
+    var url = 'vonageVoice/update-voice-app/'+app_id;
+    var params = {
+      api_key:  document.getElementById("node-config-input-apikey").value,
+      api_secret: document.getElementById("node-config-input-apisecret").value,
+      name : document.getElementById("node-config-input-name").value,
+      base_url : base_url
+    }
+    $.post(url, params)
+}
 </script>
-    
-    
+

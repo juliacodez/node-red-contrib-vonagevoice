@@ -48,6 +48,9 @@ RED.nodes.registerType("greeting", greeting);
 var storage = multer.memoryStorage()
 var upload = multer({ storage: storage })
 RED.httpAdmin.post('/vonageVoice/upload', RED.auth.needsPermission('vonage.write'),  upload.single('file'), function(req,res){
+  if (!RED.settings.httpStatic) {
+    res.status(500).send("httpStatic path must be configured in NodeRED Settings")
+  }
   if (req.file.mimetype == 'audio/mpeg' || req.file.mimetype == 'audio/x-wav'){
     const fs = require('fs');
     var filepath = RED.settings.httpStatic+'/'+req.file.originalname
