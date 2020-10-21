@@ -10,7 +10,7 @@
           number: {},
           endpoint: {},
           dest : { validate: function(n){
-            if (this.desttype == "phone"){
+            if (this.endpoint == "phone"){
                 var x = n.replace(/\D/g,'')
                 var test = libphonenumber.isValidNumber('+'+x)
                 if (!test) {
@@ -30,7 +30,7 @@
         outputs:1,
         icon: "vonage.png",
         label: function () {
-            var ifn = libphonenumber.formatNumber("+"+this.dest, 'INTERNATIONAL')
+            var ifn = libphonenumber.formatNumber("+"+this.dest.replace(/\D/g,''), 'INTERNATIONAL')
             return ifn || 'Outgoing Call'
         },
         paletteLabel: "Outgoing Call",

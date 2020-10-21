@@ -51,7 +51,7 @@ RED.httpAdmin.post('/vonageVoice/upload', RED.auth.needsPermission('vonage.write
   if (!RED.settings.httpStatic) {
     res.status(500).send("httpStatic path must be configured in NodeRED Settings")
   }
-  if (req.file.mimetype == 'audio/mpeg' || req.file.mimetype == 'audio/x-wav'){
+  else if (req.file.mimetype == 'audio/mpeg' || req.file.mimetype == 'audio/x-wav'){
     const fs = require('fs');
     var filepath = RED.settings.httpStatic+'/'+req.file.originalname
     fs.writeFileSync(filepath, req.file.buffer);  
